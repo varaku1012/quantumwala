@@ -40,9 +40,11 @@ Always structure your outputs in the following format:
 - Create detailed user stories based on the requirements scope
 - Pay special attention to: [specific focus area]
 
-**Parallel Analysis Options**: You may also run these agents in parallel:
+**Parallel Analysis Options**: Use `/planning analysis {feature-name}` to coordinate parallel work:
 - `architect`: Evaluate technical feasibility
 - `uiux-designer`: Create initial wireframes
+- `business-analyst`: Detailed requirements
+- `security-engineer`: Security implications
 
 **Example Command for Next Step**:
 ```

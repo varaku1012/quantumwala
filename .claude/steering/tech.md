@@ -12,21 +12,31 @@
 - **Runtime**: Node.js with PM2 process management
 - **API Protocol**: REST + GraphQL (Apollo Server)
 - **Real-time**: WebSockets (Socket.io) for live updates
+- **Storage**: Supabase Storage
 
-### Machine Learning & AI
-- **Primary Language**: Python 3.11+
+
+### Machine Learning Models
+- **Primary Language**: Typescript & Python 3.11+
 - **ML Framework**: TensorFlow 2.0 + PyTorch for deep learning
-- **ML Pipeline**: Apache Airflow for workflow orchestration
+- **ML Pipeline**: Prefect
 - **Model Serving**: TensorFlow Serving, TorchServe
 - **Feature Store**: Feast for ML feature management
 - **Libraries**: scikit-learn, pandas, numpy, transformers
 
+### Generative AI, Ai Agents
+- **Primary Language**: Typescript & Python 3.11+
+- **AI Agent Framework**: LangGraph
+- **Workflows**: 
+- **State Management**:
+- **Vector Database**: PGVector in Supabase
+
+
 ### Frontend Applications
-- **Web Framework**: React 18+ with TypeScript
-- **State Management**: Redux Toolkit + RTK Query
+- **Web Framework**: Next.js,React 18+ with TypeScript
+- **State Management**: 
 - **UI Components**: Ant Design + custom design system
 - **Styling**: Tailwind CSS + CSS-in-JS (Emotion)
-- **Build Tool**: Vite for fast development
+- **Animation & Transition effects** : 
 - **Testing**: Jest + React Testing Library + Cypress
 
 ### Mobile Applications
@@ -37,20 +47,20 @@
 - **Platform-specific**: Swift (iOS), Kotlin (Android) for native modules
 
 ### Data Layer
-- **Primary Database**: PostgreSQL 15+ for transactional data
-- **Time Series DB**: TimescaleDB for metrics and analytics
+- **Primary Database**: Supabase for transactional data
+- **Time Series DB**: 
 - **Cache Layer**: Redis 7+ for sessions and caching
 - **Search Engine**: Elasticsearch 8+ for full-text search
-- **Data Warehouse**: Snowflake for analytics
-- **Message Queue**: Apache Kafka for event streaming
+- **Data Warehouse**: Supabase for analytics
+- **Message Queue**: NATS for event streaming
 
 ### Infrastructure & DevOps
-- **Cloud Provider**: AWS (primary), with multi-cloud ready architecture
+- **Cloud Provider**: Azure (primary), with multi-cloud ready architecture
 - **Container Orchestration**: Kubernetes (EKS) with Helm charts
 - **Service Mesh**: Istio for microservice communication
 - **CI/CD**: GitHub Actions + ArgoCD for GitOps
 - **Monitoring**: Prometheus + Grafana + ELK stack
-- **APM**: Datadog for application performance monitoring
+- **APM**: 
 
 ## Architecture Patterns
 
@@ -59,8 +69,8 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                       Load Balancer (ALB)                     │
 ├─────────────────────────┬───────────────────────────────────┤
-│      API Gateway        │          CDN (CloudFront)          │
-│    (Kong/AWS API GW)    │                                   │
+│      API Gateway        │          CDN (Vercel)          │
+│    (Kong)               │                                   │
 ├─────────────────────────┴───────────────────────────────────┤
 │                    Kubernetes Cluster (EKS)                  │
 ├─────────────────────────────────────────────────────────────┤
@@ -75,7 +85,7 @@
 ├─────────────────────────────────────────────────────────────┤
 │                     Data Layer                               │
 │  ┌──────────┐  ┌─────────┐  ┌──────────┐  ┌────────────┐  │
-│  │PostgreSQL│  │  Redis  │  │  Kafka   │  │Elasticsearch│  │
+│  │Supabase  │  │  Redis  │  │  NATS    │  │Elasticsearch  │  │
 │  └──────────┘  └─────────┘  └──────────┘  └────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -84,15 +94,15 @@
 - **Service Discovery**: Consul/Kubernetes DNS
 - **API Gateway**: Kong for routing and auth
 - **Service Communication**: gRPC for internal, REST for external
-- **Event-Driven**: Kafka for async communication
+- **Event-Driven**: NATS for async communication
 - **Circuit Breaker**: Hystrix pattern implementation
 - **Service Mesh**: Istio for observability and security
 
 ### Data Architecture
 - **CQRS Pattern**: Separate read/write models
 - **Event Sourcing**: For audit trails and state reconstruction
-- **Data Pipeline**: Kafka → Spark → Data Warehouse
-- **CDC**: Debezium for change data capture
+- **Data Pipeline**: NATS → PySpark → Data Warehouse
+- **CDC**: <>> for change data capture
 - **Caching Strategy**: Multi-level (CDN, Redis, application)
 
 ## Performance Standards
@@ -140,7 +150,7 @@
 ### Database Standards
 - **Schema Management**: Flyway for migrations
 - **Query Optimization**: Explain analyze for all queries
-- **Connection Pooling**: PgBouncer for PostgreSQL
+- **Connection Pooling**: <>> for Supabase
 - **Backup Strategy**: Daily automated backups, point-in-time recovery
 - **Data Retention**: 7 years for compliance, configurable by data type
 
