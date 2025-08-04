@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Claude Code Enhanced Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="10">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #f0f2f5; 
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        h1 { 
+            color: #2c3e50; 
+            text-align: center; 
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+            margin-bottom: 20px;
+        }
+        .card { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 24px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .card h2 { 
+            color: #34495e; 
+            margin-bottom: 16px; 
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .metric { 
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .metric-label { 
+            color: #7f8c8d; 
+            font-size: 0.9em;
+            min-width: 120px;
+        }
+        .metric-value { 
+            font-size: 1.8em; 
+            font-weight: 600; 
+            color: #3498db;
+        }
+        .metric-small { font-size: 1.2em; }
+        .progress-bar { 
+            width: 100%; 
+            height: 8px; 
+            background: #ecf0f1; 
+            border-radius: 4px; 
+            overflow: hidden; 
+            margin: 8px 0;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: width 0.3s ease;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .status-active { background: #d4edda; color: #155724; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-completed { background: #cce5ff; color: #004085; }
+        .status-planning { background: #f8d7da; color: #721c24; }
+        .agent-activity {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .agent-badge {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .agent-count {
+            background: #1565c0;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
+        .timeline {
+            margin-top: 12px;
+        }
+        .timeline-item {
+            border-left: 2px solid #3498db;
+            padding-left: 20px;
+            margin-left: 10px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: #3498db;
+            border-radius: 50%;
+        }
+        .timeline-date {
+            color: #7f8c8d;
+            font-size: 0.85em;
+        }
+        .error-list {
+            margin-top: 12px;
+            padding: 12px;
+            background: #fff5f5;
+            border-radius: 6px;
+            border: 1px solid #ffebee;
+        }
+        .error-item {
+            color: #c62828;
+            font-size: 0.9em;
+            margin: 4px 0;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+        .full-width { grid-column: 1 / -1; }
+        .timestamp { 
+            text-align: center; 
+            color: #7f8c8d; 
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        .steering-indicator {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .doc-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        .doc-ready { background: #d4edda; color: #155724; }
+        .doc-missing { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Claude Code Enhanced Dashboard</h1>
+        
+        <div class="grid">
+            <!-- Project Overview -->
+            <div class="card">
+                <h2>📊 Project Overview</h2>
+                <p><strong>Your Project Name</strong></p>
+                <p>Phase: <span class="status-badge status-active">setup_complete</span></p>
+                <p style="margin-top: 8px; color: #7f8c8d;">Your project description</p>
+            </div>
+            
+            <!-- Performance Metrics -->
+            <div class="card">
+                <h2>⚡ Performance Metrics</h2>
+                <div class="metric">
+                    <span class="metric-label">Tasks (24h):</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Active Sessions:</span>
+                    <span class="metric-value metric-small">0</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Efficiency:</span>
+                    <span class="metric-value metric-small">20%</span>
+                </div>
+            </div>
+            
+            <!-- System Resources -->
+            <div class="card">
+                <h2>🔧 System Resources</h2>
+                <div class="metric">
+                    <span class="metric-label">Agents:</span>
+                    <span class="metric-value">16</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Commands:</span>
+                    <span class="metric-value metric-small">26</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Scripts:</span>
+                    <span class="metric-value metric-small">15</span>
+                </div>
+            </div>
+            
+            <!-- Steering Context -->
+            <div class="card">
+                <h2>🎯 Steering Context</h2>
+                <p>Status: <span class="status-badge status-completed">
+                    Initialized
+                </span></p>
+                <div class="steering-indicator">
+                    <span class="doc-status doc-ready">Product</span>
+                    <span class="doc-status doc-ready">Tech</span>
+                    <span class="doc-status doc-ready">Structure</span>
+                </div>
+                <p style="margin-top: 8px; font-size: 0.85em; color: #7f8c8d;">
+                    Last updated: 2025-08-04 03:09
+                </p>
+            </div>
+            
+            <!-- Active Specifications -->
+            <div class="card full-width">
+                <h2>📋 Active Specifications (3)</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px;">
+            <div style="padding: 16px; background: #f8f9fa; border-radius: 8px;">
+                <h3 style="margin-bottom: 8px;">auth-test</h3>
+                <span class="status-badge status-pending">Pending</span>
+                <div class="progress-bar" style="margin: 12px 0;">
+                    <div class="progress-fill" style="width: 0.0%"></div>
+                </div>
+                <p style="font-size: 0.85em; color: #7f8c8d;">
+                    0 / 4 tasks 
+                    (0.0%)
+                </p>
+                <p style="font-size: 0.8em; color: #95a5a6; margin-top: 4px;">
+                    Created: 2025-08-02 | Files: 2
+                </p>
+            </div>
+            
+            <div style="padding: 16px; background: #f8f9fa; border-radius: 8px;">
+                <h3 style="margin-bottom: 8px;">test-context-integration</h3>
+                <span class="status-badge status-active">Active</span>
+                <div class="progress-bar" style="margin: 12px 0;">
+                    <div class="progress-fill" style="width: 60.0%"></div>
+                </div>
+                <p style="font-size: 0.85em; color: #7f8c8d;">
+                    3 / 5 tasks 
+                    (60.0%)
+                </p>
+                <p style="font-size: 0.8em; color: #95a5a6; margin-top: 4px;">
+                    Created: 2025-08-02 | Files: 3
+                </p>
+            </div>
+            
+            <div style="padding: 16px; background: #f8f9fa; border-radius: 8px;">
+                <h3 style="margin-bottom: 8px;">test-demo</h3>
+                <span class="status-badge status-pending">Pending</span>
+                <div class="progress-bar" style="margin: 12px 0;">
+                    <div class="progress-fill" style="width: 0.0%"></div>
+                </div>
+                <p style="font-size: 0.85em; color: #7f8c8d;">
+                    0 / 5 tasks 
+                    (0.0%)
+                </p>
+                <p style="font-size: 0.8em; color: #95a5a6; margin-top: 4px;">
+                    Created: 2025-08-02 | Files: 1
+                </p>
+            </div>
+            </div>
+            </div>
+            
+            <!-- Agent Activity -->
+            <div class="card">
+                <h2>🤖 Agent Activity (24h)</h2>
+                <div class="agent-activity">
+                    
+            <div class="agent-badge">
+                Product Manager
+                <span class="agent-count">2</span>
+            </div>
+            
+            <div class="agent-badge">
+                Chief Product Manager
+                <span class="agent-count">2</span>
+            </div>
+            
+            <div class="agent-badge">
+                Business Analyst
+                <span class="agent-count">1</span>
+            </div>
+            
+            <div class="agent-badge">
+                Architect
+                <span class="agent-count">1</span>
+            </div>
+            
+            <div class="agent-badge">
+                Developer
+                <span class="agent-count">1</span>
+            </div>
+            
+            <div class="agent-badge">
+                Qa Engineer
+                <span class="agent-count">1</span>
+            </div>
+            
+            <div class="agent-badge">
+                Code Reviewer
+                <span class="agent-count">1</span>
+            </div>
+            
+            <div class="agent-badge">
+                Uiux Designer
+                <span class="agent-count">1</span>
+            </div>
+            
+                </div>
+            </div>
+            
+            <!-- Task Timeline -->
+            <div class="card">
+                <h2>📅 Recent Task Timeline</h2>
+                <div class="timeline">
+                    <p style="color: #7f8c8d;">No recent tasks</p>
+                </div>
+            </div>
+            
+            <!-- Log Analysis -->
+            <div class="card">
+                <h2>📝 Log Analysis</h2>
+                <div class="metric">
+                    <span class="metric-label">Total Logs:</span>
+                    <span class="metric-value metric-small">27</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Errors:</span>
+                    <span class="metric-value metric-small" style="color: #e74c3c;">0</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Warnings:</span>
+                    <span class="metric-value metric-small" style="color: #f39c12;">0</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="timestamp">
+            Last updated: 2025-08-04 03:09:51 | Auto-refreshes every 10 seconds
+        </div>
+    </div>
+</body>
+</html>

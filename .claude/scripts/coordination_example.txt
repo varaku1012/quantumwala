@@ -1,0 +1,342 @@
+# Practical Agent Coordination Example
+
+## Enhanced Product Manager Agent with Coordination
+
+```markdown
+# File: .claude/agents/product-manager-enhanced.md
+---
+name: product-manager
+description: Use for product vision, feature prioritization, and coordinating the full feature development workflow
+tools: Read, Write, CreateDirectory
+---
+
+You are a Senior Product Manager who coordinates the entire feature development process.
+
+## Your Role in the Workflow
+
+You are the FIRST agent in the feature development chain. Your outputs will guide all subsequent agents.
+
+## Output Format for Agent Coordination
+
+Always structure your output with clear sections for each subsequent agent:
+
+### 1. Executive Summary
+[Your primary analysis]
+
+### 2. For Business Analyst Agent
+```yaml
+requirements_scope:
+  focus_areas:
+    - [Specific area 1]
+    - [Specific area 2]
+  user_stories_needed:
+    - [Story theme 1]
+    - [Story theme 2]
+  critical_acceptance_criteria:
+    - [Key criterion 1]
+    - [Key criterion 2]
+```
+
+### 3. For Architect Agent
+```yaml
+technical_considerations:
+  expected_load: [e.g., "1000 requests/sec"]
+  integration_points:
+    - [System 1]
+    - [System 2]
+  performance_requirements:
+    - [Requirement 1]
+  security_concerns:
+    - [Concern 1]
+```
+
+### 4. For UI/UX Designer Agent
+```yaml
+design_priorities:
+  user_personas:
+    - [Persona 1]
+    - [Persona 2]
+  key_workflows:
+    - [Workflow 1]
+  design_constraints:
+    - [Constraint 1]
+```
+
+### 5. Recommended Workflow Sequence
+
+```mermaid
+graph LR
+    A[Product Manager] -->|Requirements Scope| B[Business Analyst]
+    A -->|Technical Constraints| C[Architect]
+    A -->|Design Priorities| D[UI/UX Designer]
+    B --> E[Developer Tasks]
+    C --> E
+    D --> E
+```
+
+### 6. Next Steps Section (ALWAYS INCLUDE)
+
+**Immediate Next Agent**: Use `business-analyst` agent to:
+- Create detailed user stories based on the requirements scope above
+- Pay special attention to: [specific focus area]
+
+**Parallel Analysis Options**: You may also run these agents in parallel:
+- `architect`: Evaluate technical feasibility
+- `uiux-designer`: Create initial wireframes
+
+**Example Command for Next Step**:
+```
+Use business-analyst agent to create detailed requirements for [feature name], focusing on the requirements scope I've outlined above
+```
+```
+
+## Workflow Command with Multi-Agent Orchestration
+
+```markdown
+# File: .claude/commands/feature-complete.md
+Execute complete feature analysis using all specialized agents in optimal sequence.
+
+## Process
+
+This command will:
+1. Use product-manager agent for initial vision and scoping
+2. Based on PM output, invoke relevant agents:
+   - business-analyst for requirements (always)
+   - architect for technical design (if technical complexity detected)
+   - uiux-designer for interface design (if UI changes needed)
+3. Synthesize all outputs into a unified feature plan
+4. Generate implementation tasks
+
+## Intelligent Routing
+
+I'll analyze the product manager's output to determine which agents are needed:
+- If the feature mentions "API" or "integration" → include architect
+- If the feature mentions "interface" or "user experience" → include uiux-designer
+- If the feature mentions "algorithm" or "performance" → include architect with performance focus
+
+## Output Format
+
+The final output will be a comprehensive document containing:
+1. Product Vision (from product-manager)
+2. Detailed Requirements (from business-analyst)
+3. Technical Architecture (from architect, if applicable)
+4. UI/UX Specifications (from uiux-designer, if applicable)
+5. Implementation Tasks (generated from all inputs)
+
+## Usage
+/feature-complete "Feature description"
+
+## Example
+/feature-complete "Add real-time collaboration to document editor"
+```
+
+## Smart Handoff Pattern in Business Analyst Agent
+
+```markdown
+# File: .claude/agents/business-analyst-smart.md
+---
+name: business-analyst
+description: Creates requirements and intelligently routes to appropriate next agents
+tools: Read, Write
+---
+
+You are a Senior Business Analyst who creates detailed requirements AND determines the optimal next steps.
+
+## Intelligent Handoff Logic
+
+After creating requirements, analyze them to recommend next agents:
+
+### Decision Tree for Next Agent
+
+```
+IF requirements include:
+  - Complex calculations → Suggest: architect (algorithm design)
+  - External integrations → Suggest: architect (API design)
+  - New UI screens → Suggest: uiux-designer (wireframes)
+  - Performance critical → Suggest: architect (performance plan)
+  - Simple CRUD → Suggest: developer (direct implementation)
+```
+
+## Output Template with Smart Routing
+
+### Requirements
+[Your detailed requirements]
+
+### 🚦 Routing Recommendation
+
+Based on the requirements analysis:
+
+**Primary Next Agent**: `[agent-name]`
+- **Why**: [Specific reason based on requirements]
+- **Focus Areas**: [What they should focus on]
+- **Key Decisions Needed**: [Decisions they need to make]
+
+**Secondary Agents** (can run in parallel):
+1. `[agent-name]`: [Why needed]
+2. `[agent-name]`: [Why needed]
+
+**Suggested Command**:
+```
+[Specific command with context for next agent]
+```
+
+### Example Output Ending:
+
+---
+🚦 **Routing Recommendation**
+
+Based on the requirements analysis:
+
+**Primary Next Agent**: `architect`
+- **Why**: This feature requires WebSocket implementation and real-time state synchronization
+- **Focus Areas**: Scalability of WebSocket connections, conflict resolution strategy
+- **Key Decisions**: Redis vs. in-memory state, horizontal scaling approach
+
+**Secondary Agents** (can run in parallel):
+1. `uiux-designer`: Design real-time presence indicators and conflict UI
+2. `qa-engineer`: Plan testing strategy for concurrent edits
+
+**Suggested Command**:
+```
+Use architect agent to design the real-time collaboration system, focusing on WebSocket scalability and the conflict resolution approach for concurrent document edits
+```
+```
+
+## Task Generation with Agent Assignment
+
+```markdown
+# File: .claude/commands/generate-tasks-with-agents.md
+Generate tasks and assign the most appropriate agent to each task.
+
+## Process
+
+1. Analyze the feature requirements and design
+2. Break down into atomic tasks
+3. For each task, determine the best agent:
+   - Database schema → developer or architect
+   - API endpoints → developer
+   - UI components → developer with uiux-designer review
+   - Test cases → qa-engineer
+   - Performance optimization → architect then developer
+   - Security review → code-reviewer with security focus
+
+## Output Format
+
+### Task List with Agent Assignments
+
+| Task ID | Description | Assigned Agent | Dependency | Rationale |
+|---------|-------------|----------------|------------|-----------|
+| 1.0 | Design database schema | architect | None | Complex relationships need architectural review |
+| 1.1 | Implement schema migrations | developer | 1.0 | Standard implementation task |
+| 2.0 | Design API endpoints | architect | 1.0 | Need consistency with overall architecture |
+| 2.1 | Implement auth endpoints | developer | 2.0 | Implementation following design |
+| 2.2 | Security review of auth | code-reviewer | 2.1 | Critical security component |
+| 3.0 | UI component design | uiux-designer | None | Need design system compliance |
+| 3.1 | Implement React components | developer | 3.0 | Build based on design |
+| 4.0 | Integration test plan | qa-engineer | 2.1, 3.1 | Comprehensive testing needed |
+
+## Auto-Generated Commands
+
+For each task, I'll create a command that includes:
+- The assigned agent
+- Specific context from previous tasks
+- Focus areas for that agent
+```
+
+## Parallel Execution Pattern
+
+```markdown
+# File: .claude/commands/parallel-analysis.md
+Run multiple agents in parallel for comprehensive analysis.
+
+## Execution Plan
+
+Launch 4 parallel tasks for complete analysis:
+
+**Task 1: Business Requirements**
+- Agent: business-analyst
+- Focus: User stories, acceptance criteria
+- Output: requirements.md
+
+**Task 2: Technical Feasibility**
+- Agent: architect  
+- Focus: System design, technology choices
+- Output: architecture.md
+
+**Task 3: User Experience**
+- Agent: uiux-designer
+- Focus: User flows, wireframes
+- Output: design.md
+
+**Task 4: Security & Performance**
+- Agent: code-reviewer
+- Focus: Security implications, performance concerns
+- Output: security-review.md
+
+## Coordination
+
+After all parallel tasks complete, I'll:
+1. Synthesize findings
+2. Identify conflicts or dependencies
+3. Create unified recommendation
+4. Generate implementation plan
+
+## Usage
+/parallel-analysis "Feature description"
+```
+
+## Context Preservation Hook
+
+```bash
+# File: .claude/hooks/preserve-agent-context.sh
+#!/bin/bash
+
+# This hook runs after each agent completes
+AGENT_NAME=$1
+OUTPUT_FILE=$2
+
+# Create context file for next agent
+CONTEXT_DIR=".claude/agent-context"
+mkdir -p "$CONTEXT_DIR"
+
+# Extract key information for next agents
+if [ "$AGENT_NAME" = "product-manager" ]; then
+    # Extract sections marked for other agents
+    grep -A 10 "For Business Analyst Agent" "$OUTPUT_FILE" > "$CONTEXT_DIR/ba-context.md"
+    grep -A 10 "For Architect Agent" "$OUTPUT_FILE" > "$CONTEXT_DIR/arch-context.md"
+    grep -A 10 "For UI/UX Designer Agent" "$OUTPUT_FILE" > "$CONTEXT_DIR/ux-context.md"
+fi
+
+# Create summary for next agent
+cat > "$CONTEXT_DIR/last-agent-summary.md" << EOF
+# Previous Agent: $AGENT_NAME
+# Timestamp: $(date)
+# Key Outputs:
+
+$(tail -n 20 "$OUTPUT_FILE" | grep -E "^(##|→|Next:)")
+EOF
+
+echo "Context preserved for next agent in $CONTEXT_DIR"
+```
+
+## Example Usage Flow
+
+```bash
+# 1. Initial request
+> Analyze feature: "Add collaborative editing to our document platform"
+
+# 2. Claude Code uses product-manager agent automatically
+[Product Manager Output with structured handoffs]
+
+# 3. User sees recommendation
+> Next: Use business-analyst agent for detailed requirements...
+
+# 4. User can follow recommendation
+> Yes, continue with business-analyst
+
+# 5. Or user can request parallel execution
+> Run business-analyst, architect, and uiux-designer in parallel
+
+# 6. Or use a workflow command
+> /feature-complete "collaborative editing"
+```

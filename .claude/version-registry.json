@@ -1,0 +1,222 @@
+{
+  "system_version": "1.0.0",
+  "last_updated": "2025-08-04T02:43:56.577520",
+  "components": {
+    "agent:architect": {
+      "name": "architect",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\architect.md",
+      "file_hash": "0e6a21fac1fae1e9e4acb2edd65ecd7b",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:business-analyst": {
+      "name": "business-analyst",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\business-analyst.md",
+      "file_hash": "c645f5813d33dd5a2547a469dbfad6e8",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:chief-product-manager": {
+      "name": "chief-product-manager",
+      "version": "1.2.0",
+      "file_path": ".claude\\agents\\chief-product-manager.md",
+      "file_hash": "2d37be2127b0e370498ac6090478b67b",
+      "created": "2025-01-15",
+      "updated": "2025-08-03",
+      "changelog": [
+        "1.0.0: Initial agent creation",
+        "1.1.0: Added market research capabilities",
+        "1.2.0: Enhanced with context engineering framework"
+      ],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:code-reviewer": {
+      "name": "code-reviewer",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\code-reviewer.md",
+      "file_hash": "52d339bd9af53c938d5a08544cd8c2f9",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:developer": {
+      "name": "developer",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\developer.md",
+      "file_hash": "eaad2aee6e60a01b7f24dcfb3394b41c",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:product-manager": {
+      "name": "product-manager",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\product-manager.md",
+      "file_hash": "b4030dde6cfcf94e2e62344a238cf13f",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:qa-engineer": {
+      "name": "qa-engineer",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\qa-engineer.md",
+      "file_hash": "da02828767c0b2420c17502e3b1a427d",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:spec-design-validator": {
+      "name": "spec-design-validator",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\spec-design-validator.md",
+      "file_hash": "72b6dcf593ec4507315f6f37485ba9f1",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:spec-requirements-validator": {
+      "name": "spec-requirements-validator",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\spec-requirements-validator.md",
+      "file_hash": "7a36fb1102250109a12ce2dfb442506b",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:spec-task-executor": {
+      "name": "spec-task-executor",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\spec-task-executor.md",
+      "file_hash": "e2e2e1697158cad1a1b4298213c2bba5",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.570699"
+    },
+    "agent:spec-task-validator": {
+      "name": "spec-task-validator",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\spec-task-validator.md",
+      "file_hash": "620416b46fa590fedda2364c253b44e3",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.575516"
+    },
+    "agent:uiux-designer": {
+      "name": "uiux-designer",
+      "version": "0.0.0",
+      "file_path": ".claude\\agents\\uiux-designer.md",
+      "file_hash": "1a07aee9d0d66dae54e28070d881cefb",
+      "created": null,
+      "updated": null,
+      "changelog": [],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.575516"
+    },
+    "script:enhanced-dashboard": {
+      "name": "enhanced-dashboard",
+      "version": "2.0.0",
+      "file_path": ".claude\\scripts\\enhanced_dashboard.py",
+      "file_hash": "d3b62ecc3088ff4efc80686ad93b3ce4",
+      "created": "2025-08-03",
+      "updated": "2025-08-03",
+      "changelog": [
+        "1.0.0: Basic dashboard with project metrics",
+        "1.5.0: Added agent activity and timeline",
+        "2.0.0: Integrated performance monitoring and modern UI"
+      ],
+      "dependencies": [
+        "python>=3.7",
+        "performance_monitor (optional)"
+      ],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.575516"
+    },
+    "script:performance-monitor": {
+      "name": "performance-monitor",
+      "version": "1.1.0",
+      "file_path": ".claude\\scripts\\performance_monitor.py",
+      "file_hash": "5c20d65674c15523c58c884b581a682a",
+      "created": "2025-08-03",
+      "updated": "2025-08-03",
+      "changelog": [
+        "1.0.0: Initial performance monitoring implementation",
+        "1.1.0: Added real-time dashboard integration"
+      ],
+      "dependencies": [
+        "psutil>=5.9.0",
+        "python>=3.7"
+      ],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.575516"
+    },
+    "script:version-manager": {
+      "name": "version-manager",
+      "version": "1.0.0",
+      "file_path": ".claude\\scripts\\version_manager.py",
+      "file_hash": "adb306be4fe05b3902d362e40340fb7e",
+      "created": "2025-08-03",
+      "updated": "2025-08-03",
+      "changelog": [
+        "1.0.0: Initial version management system"
+      ],
+      "dependencies": [
+        "python>=3.7",
+        "pyyaml (optional)"
+      ],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.577520"
+    },
+    "command:version": {
+      "name": "version",
+      "version": "1.0.0",
+      "file_path": ".claude\\commands\\version.md",
+      "file_hash": "6b89ac4246d5351014e5cf31cb1dcba8",
+      "created": "2025-08-03",
+      "updated": "2025-08-03",
+      "changelog": [
+        "1.0.0: Initial version management command"
+      ],
+      "dependencies": [],
+      "tags": [],
+      "last_scanned": "2025-08-04T02:43:56.577520"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "spec_workflow": {
+    "version": "1.0.0",
+    "auto_create_directories": true,
+    "auto_reference_requirements": true,
+    "enforce_approval_workflow": true,
+    "default_feature_prefix": "feature-",
+    "supported_formats": [
+      "markdown",
+      "mermaid"
+    ],
+    "agents_enabled": true,
+    "context_engineering": true
+  },
+  "context_settings": {
+    "max_tokens_per_load": 5000,
+    "smart_loading": true,
+    "cross_platform": true
+  }
+}

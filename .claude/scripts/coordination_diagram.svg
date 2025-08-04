@@ -1,0 +1,108 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold">Claude Code Sub-Agent Coordination</text>
+  
+  <!-- Claude Code Main -->
+  <rect x="300" y="60" width="200" height="60" fill="#3B82F6" stroke="#1E40AF" stroke-width="2" rx="5"/>
+  <text x="400" y="95" text-anchor="middle" fill="white" font-weight="bold">Claude Code</text>
+  <text x="400" y="110" text-anchor="middle" fill="white" font-size="12">(Orchestrator)</text>
+  
+  <!-- User Input -->
+  <rect x="50" y="80" width="150" height="40" fill="#10B981" stroke="#059669" stroke-width="2" rx="5"/>
+  <text x="125" y="105" text-anchor="middle" fill="white">User Request</text>
+  <path d="M 200 100 L 300 90" stroke="#059669" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Product Manager Agent -->
+  <rect x="100" y="180" width="150" height="80" fill="#8B5CF6" stroke="#6D28D9" stroke-width="2" rx="5"/>
+  <text x="175" y="210" text-anchor="middle" fill="white" font-weight="bold">Product Manager</text>
+  <text x="175" y="230" text-anchor="middle" fill="white" font-size="11">Creates vision</text>
+  <text x="175" y="245" text-anchor="middle" fill="white" font-size="11">Suggests next agents</text>
+  
+  <!-- Business Analyst Agent -->
+  <rect x="300" y="180" width="150" height="80" fill="#8B5CF6" stroke="#6D28D9" stroke-width="2" rx="5"/>
+  <text x="375" y="210" text-anchor="middle" fill="white" font-weight="bold">Business Analyst</text>
+  <text x="375" y="230" text-anchor="middle" fill="white" font-size="11">Requirements</text>
+  <text x="375" y="245" text-anchor="middle" fill="white" font-size="11">User stories</text>
+  
+  <!-- Architect Agent -->
+  <rect x="500" y="180" width="150" height="80" fill="#8B5CF6" stroke="#6D28D9" stroke-width="2" rx="5"/>
+  <text x="575" y="210" text-anchor="middle" fill="white" font-weight="bold">Architect</text>
+  <text x="575" y="230" text-anchor="middle" fill="white" font-size="11">System design</text>
+  <text x="575" y="245" text-anchor="middle" fill="white" font-size="11">Tech stack</text>
+  
+  <!-- Arrows from Claude Code to Agents -->
+  <path d="M 350 120 L 175 180" stroke="#3B82F6" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 400 120 L 375 180" stroke="#3B82F6" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 450 120 L 575 180" stroke="#3B82F6" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Communication Methods -->
+  <g transform="translate(50, 320)">
+    <rect x="0" y="0" width="700" height="220" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1" rx="5"/>
+    <text x="350" y="25" text-anchor="middle" font-size="16" font-weight="bold">Agent Communication Methods</text>
+    
+    <!-- Method 1 -->
+    <rect x="20" y="40" width="150" height="60" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1" rx="3"/>
+    <text x="95" y="60" text-anchor="middle" font-weight="bold" font-size="12">1. Auto-Delegation</text>
+    <text x="95" y="75" text-anchor="middle" font-size="10">Claude picks agent</text>
+    <text x="95" y="90" text-anchor="middle" font-size="10">based on context</text>
+    
+    <!-- Method 2 -->
+    <rect x="190" y="40" width="150" height="60" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1" rx="3"/>
+    <text x="265" y="60" text-anchor="middle" font-weight="bold" font-size="12">2. Output Suggestions</text>
+    <text x="265" y="75" text-anchor="middle" font-size="10">"Next: Use architect"</text>
+    <text x="265" y="90" text-anchor="middle" font-size="10">in agent output</text>
+    
+    <!-- Method 3 -->
+    <rect x="360" y="40" width="150" height="60" fill="#D1FAE5" stroke="#10B981" stroke-width="1" rx="3"/>
+    <text x="435" y="60" text-anchor="middle" font-weight="bold" font-size="12">3. Workflow Commands</text>
+    <text x="435" y="75" text-anchor="middle" font-size="10">/feature-complete</text>
+    <text x="435" y="90" text-anchor="middle" font-size="10">chains agents</text>
+    
+    <!-- Method 4 -->
+    <rect x="530" y="40" width="150" height="60" fill="#E9D5FF" stroke="#8B5CF6" stroke-width="1" rx="3"/>
+    <text x="605" y="60" text-anchor="middle" font-weight="bold" font-size="12">4. Parallel Tasks</text>
+    <text x="605" y="75" text-anchor="middle" font-size="10">Run multiple agents</text>
+    <text x="605" y="90" text-anchor="middle" font-size="10">simultaneously</text>
+    
+    <!-- Example Flow -->
+    <text x="20" y="130" font-weight="bold" font-size="14">Example Coordination Flow:</text>
+    
+    <!-- Flow diagram -->
+    <rect x="20" y="145" width="80" height="30" fill="#8B5CF6" stroke="#6D28D9" stroke-width="1" rx="3"/>
+    <text x="60" y="165" text-anchor="middle" fill="white" font-size="11">PM Agent</text>
+    
+    <path d="M 100 160 L 130 160" stroke="#6D28D9" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="115" y="155" text-anchor="middle" font-size="9">"Next: BA"</text>
+    
+    <rect x="130" y="145" width="80" height="30" fill="#8B5CF6" stroke="#6D28D9" stroke-width="1" rx="3"/>
+    <text x="170" y="165" text-anchor="middle" fill="white" font-size="11">BA Agent</text>
+    
+    <path d="M 210 160 L 240 160" stroke="#6D28D9" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="225" y="155" text-anchor="middle" font-size="9">"If complex"</text>
+    
+    <rect x="240" y="145" width="80" height="30" fill="#8B5CF6" stroke="#6D28D9" stroke-width="1" rx="3"/>
+    <text x="280" y="165" text-anchor="middle" fill="white" font-size="11">Architect</text>
+    
+    <path d="M 320 160 L 350 160" stroke="#6D28D9" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="350" y="145" width="80" height="30" fill="#059669" stroke="#047857" stroke-width="1" rx="3"/>
+    <text x="390" y="165" text-anchor="middle" fill="white" font-size="11">Tasks</text>
+    
+    <text x="20" y="195" font-size="10" font-style="italic">Agents pass context through structured output</text>
+  </g>
+  
+  <!-- Key Points -->
+  <g transform="translate(100, 280)">
+    <text x="0" y="0" font-weight="bold" font-size="12">Key Points:</text>
+    <text x="0" y="20" font-size="11">• No direct API calls between agents</text>
+    <text x="250" y="20" font-size="11">• Claude Code manages orchestration</text>
+    <text x="500" y="20" font-size="11">• Context via output</text>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+</svg>
