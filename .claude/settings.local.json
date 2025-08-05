@@ -6,8 +6,6 @@
       "Bash(dir:*)",
       "Bash(ls:*)",
       "Bash(find:*)",
-      "Bash(dir:*)",
-      "Bash(ls:*)",
       "Bash(mv:*)",
       "Bash(cp:*)",
       "WebFetch(domain:github.com)",
@@ -20,9 +18,86 @@
       "Bash(gh repo create:*)",
       "Bash(git remote add:*)",
       "Bash(git push:*)",
-      "Bash(find:*)",
-      "Bash(git add:*)"
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": []
+  },
+  "hooks": {
+    "post_command": {
+      "enabled": true,
+      "script": ".claude/hooks/phase-complete.sh",
+      "timeout": 30,
+      "description": "Automatic workflow phase progression"
+    },
+    "pre_task": {
+      "enabled": true,
+      "script": ".claude/hooks/pre-task.sh",
+      "timeout": 10,
+      "description": "Pre-task dependency checking and logging"
+    },
+    "post_task": {
+      "enabled": true,
+      "script": ".claude/hooks/post-task.sh",
+      "timeout": 10,
+      "description": "Post-task status updating and logging"
+    },
+    "preserve_context": {
+      "enabled": true,
+      "script": ".claude/hooks/preserve-agent-context.sh",
+      "timeout": 15,
+      "description": "Preserve agent context for next execution"
+    }
+  },
+  "workflow": {
+    "auto_progression": true,
+    "suggestion_file": ".claude/next_command.txt",
+    "state_file": ".claude/unified_state.json",
+    "max_retries": 3,
+    "retry_delay": 5,
+    "enable_parallel_execution": true,
+    "max_concurrent_tasks": 8
+  },
+  "execution": {
+    "default_timeout": 300,
+    "agent_timeout": 600,
+    "orchestration_timeout": 1800,
+    "enable_real_execution": true,
+    "simulate_mode": false
+  },
+  "resources": {
+    "max_concurrent_tasks": 8,
+    "cpu_limit_percent": 80,
+    "memory_limit_percent": 75,
+    "memory_reserve_mb": 1024,
+    "resource_check_interval": 2
+  },
+  "logging": {
+    "level": "INFO",
+    "enable_performance_tracking": true,
+    "enable_resource_monitoring": true,
+    "log_retention_days": 30,
+    "enable_execution_logs": true
+  },
+  "agents": {
+    "prefer_specialized": true,
+    "enable_agent_selection": true,
+    "track_performance": true,
+    "failure_recovery": true,
+    "context_caching": true
+  },
+  "monitoring": {
+    "enable_dashboard": true,
+    "dashboard_port": 8080,
+    "dashboard_refresh_interval": 10,
+    "enable_metrics_export": true,
+    "metrics_export_interval": 300
+  },
+  "development": {
+    "debug_mode": false,
+    "verbose_logging": false,
+    "dry_run": false,
+    "enable_testing_mode": false
   }
 }
