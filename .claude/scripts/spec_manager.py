@@ -4,6 +4,7 @@ Comprehensive spec lifecycle management
 """
 
 import json
+import re
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -21,6 +22,15 @@ class SpecManager:
         self.specs_root = Path('.claude/specs')
         self.meta_dir = self.specs_root / '_meta'
         self.ensure_structure()
+        
+        # Required metadata fields
+        self.required_metadata_fields = [
+            'name', 'description', 'stage', 'created', 'updated',
+            'completion_rate', 'priority', 'version'
+        ]
+        
+        # Valid priority values
+        self.valid_priorities = ['low', 'medium', 'high', 'critical']
     
     def ensure_structure(self):
         """Ensure proper directory structure exists"""
@@ -28,33 +38,87 @@ class SpecManager:
             (self.specs_root / stage.value).mkdir(parents=True, exist_ok=True)
         self.meta_dir.mkdir(parents=True, exist_ok=True)
     
+    def validate_metadata(self, metadata: Dict) -> List[str]:
+        """Validate metadata completeness and correctness"""
+        issues = []
+        
+        # Check required fields
+        for field in self.required_metadata_fields:
+            if field not in metadata:
+                issues.append(f"Missing required field: {field}")
+        
+        # Validate specific fields
+        if 'priority' in metadata and metadata['priority'] not in self.valid_priorities:
+            issues.append(f"Invalid priority: {metadata['priority']}. Must be one of: {', '.join(self.valid_priorities)}")
+        
+        if 'completion_rate' in metadata:
+            rate = metadata['completion_rate']
+            if not isinstance(rate, (int, float)) or rate < 0 or rate > 1:
+                issues.append(f"Invalid completion_rate: {rate}. Must be between 0 and 1")
+        
+        if 'stage' in metadata and metadata['stage'] not in [s.value for s in SpecStage]:
+            issues.append(f"Invalid stage: {metadata['stage']}")
+        
+        return issues
+    
+    def validate_spec_structure(self, spec_dir: Path) -> List[str]:
+        """Validate that spec has required structure"""
+        issues = []
+        
+        required_files = ['overview.md', '_meta.json', 'README.md']
+        for file in required_files:
+            if not (spec_dir / file).exists():
+                issues.append(f"Missing required file: {file}")
+        
+        # Check metadata content
+        meta_file = spec_dir / '_meta.json'
+        if meta_file.exists():
+            try:
+                metadata = json.loads(meta_file.read_text())
+                metadata_issues = self.validate_metadata(metadata)
+                issues.extend(metadata_issues)
+            except json.JSONDecodeError:
+                issues.append("Invalid JSON in _meta.json")
+            except Exception as e:
+                issues.append(f"Error reading _meta.json: {e}")
+        
+        return issues
+    
     def create_spec(self, name: str, description: str, stage: SpecStage = SpecStage.BACKLOG) -> bool:
-        """Create new specification"""
+        """Create new specification with complete metadata and error handling"""
         spec_dir = self.specs_root / stage.value / name
         
         if spec_dir.exists():
             print(f"❌ Spec '{name}' already exists in {stage.value}")
             return False
         
-        spec_dir.mkdir(parents=True)
-        
-        # Create metadata
-        metadata = {
-            'name': name,
-            'description': description,
-            'stage': stage.value,
-            'created': datetime.now().isoformat(),
-            'updated': datetime.now().isoformat(),
-            'completion_rate': 0.0,
-            'priority': 'medium',
-            'tags': [],
-            'assignee': None
-        }
-        
-        (spec_dir / '_meta.json').write_text(json.dumps(metadata, indent=2))
-        
-        # Create overview
-        overview_content = f"""# {name.replace('-', ' ').title()}
+        try:
+            # Create directory with parents
+            spec_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Create COMPLETE metadata with all required fields
+            metadata = {
+                'name': name,
+                'description': description,
+                'stage': stage.value,
+                'created': datetime.now().isoformat(),
+                'updated': datetime.now().isoformat(),
+                'completion_rate': 0.0,
+                'priority': 'medium',
+                'tags': [],
+                'assignee': None,
+                'version': '1.0.0',
+                'estimated_effort': 'TBD'
+            }
+            
+            # Write metadata with error handling
+            (spec_dir / '_meta.json').write_text(
+                json.dumps(metadata, indent=2), 
+                encoding='utf-8'
+            )
+            
+            # Create overview with better template
+            overview_content = f"""# {name.replace('-', ' ').title()}
 
 **Status**: {stage.value.title()}  
 **Created**: {datetime.now().strftime('%Y-%m-%d')}  
@@ -64,30 +128,85 @@ class SpecManager:
 {description}
 
 ## Success Criteria
-- [ ] Define success criteria
+- [ ] Define clear success criteria
+- [ ] Establish measurable outcomes
+- [ ] Set completion timeline
 
 ## Next Steps
-- [ ] Define next steps based on stage
+Based on current stage ({stage.value}):
 """
-        (spec_dir / 'overview.md').write_text(overview_content)
-        
-        # Create README
-        readme_content = f"""# {name}
+            
+            if stage == SpecStage.BACKLOG:
+                overview_content += """
+- [ ] Refine requirements and scope
+- [ ] Estimate effort and timeline
+- [ ] Prioritize against other backlog items
+"""
+            elif stage == SpecStage.SCOPE:
+                overview_content += """
+- [ ] Create detailed requirements
+- [ ] Design technical architecture
+- [ ] Break down into implementation tasks
+"""
+            else:
+                overview_content += """
+- [ ] Review current status
+- [ ] Update documentation
+- [ ] Plan next actions
+"""
+            
+            (spec_dir / 'overview.md').write_text(overview_content, encoding='utf-8')
+            
+            # Create comprehensive README
+            readme_content = f"""# {name}
 
 Quick reference for the {name} specification.
 
 **Stage**: {stage.value}  
-**Description**: {description}
+**Description**: {description}  
+**Created**: {datetime.now().strftime('%Y-%m-%d')}
 
 ## Files
 - `overview.md` - Feature overview and success criteria
-- `_meta.json` - Specification metadata
+- `_meta.json` - Specification metadata and tracking
+- `requirements.md` - Detailed requirements (created when moved to scope)
+- `design.md` - Technical design (created during design phase)
+- `tasks.md` - Implementation tasks (created during task breakdown)
+
+## Quick Commands
+```bash
+# View status
+python .claude/scripts/spec_manager.py status
+
+# Promote to next stage
+python .claude/scripts/spec_manager.py promote {name} --to=scope
+
+# Update metadata
+# Edit _meta.json directly or use promotion commands
+```
 """
-        (spec_dir / 'README.md').write_text(readme_content)
-        
-        self.update_dashboard()
-        print(f"Created spec '{name}' in {stage.value}")
-        return True
+            (spec_dir / 'README.md').write_text(readme_content, encoding='utf-8')
+            
+            # Update dashboard with error handling
+            try:
+                self.update_dashboard()
+            except Exception as e:
+                print(f"Warning: Could not update dashboard: {e}")
+                # Don't fail the entire operation if dashboard update fails
+            
+            print(f"✅ Created spec '{name}' in {stage.value}")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Failed to create spec '{name}': {e}")
+            # Clean up partial creation
+            if spec_dir.exists():
+                import shutil
+                try:
+                    shutil.rmtree(spec_dir)
+                except:
+                    pass
+            return False
     
     def promote_spec(self, name: str, to_stage: SpecStage, reason: str = "") -> bool:
         """Promote spec to different stage"""
@@ -210,10 +329,30 @@ Quick reference for the {name} specification.
         if tasks_file.exists():
             try:
                 tasks_content = tasks_file.read_text(encoding='utf-8')
-                completed_tasks = tasks_content.count('✅')
-                total_tasks = tasks_content.count('#### Task')
+                
+                # Find all task headers and their completion status
+                import re
+                task_pattern = r'#### Task \d+:.*?\n(?:.*?\n)*?(?=#### Task|\Z)'
+                tasks = re.findall(task_pattern, tasks_content, re.DOTALL)
+                
+                total_tasks = len(tasks)
+                completed_tasks = 0
+                
+                for task in tasks:
+                    # Count tasks with completion markers
+                    # Check for ✅ in task headers or status lines
+                    task_lines = task.split('\n')
+                    for line in task_lines:
+                        if line.startswith('**Status:**') and ('✅' in line or 'completed' in line.lower()):
+                            completed_tasks += 1
+                            break
+                        elif line.startswith('#### Task') and '✅' in line:
+                            completed_tasks += 1
+                            break
+                
                 completion_rate = completed_tasks / total_tasks if total_tasks > 0 else 0
-            except UnicodeDecodeError:
+                
+            except (UnicodeDecodeError, Exception) as e:
                 # Fallback for encoding issues
                 completion_rate = 0
         else:
@@ -227,10 +366,14 @@ Quick reference for the {name} specification.
         return metadata
     
     def update_dashboard(self):
-        """Update the status dashboard"""
-        overview = self.get_status_overview()
-        
-        dashboard_content = f"""# 📊 Specs Status Dashboard
+        """Update the status dashboard with error handling"""
+        try:
+            overview = self.get_status_overview()
+            
+            # Ensure meta directory exists
+            self.meta_dir.mkdir(parents=True, exist_ok=True)
+            
+            dashboard_content = f"""# 📊 Specs Status Dashboard
 *Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*
 
 ## Overview
@@ -244,33 +387,91 @@ Quick reference for the {name} specification.
 
 ## 🎯 Active Development (Scope)
 """
-        
-        for spec in overview['scope']['specs']:
-            completion = spec.get('completion_rate', 0)
-            name = spec.get('name', 'Unknown')
-            dashboard_content += f"- **{name}**: {completion:.0%} complete\n"
-        
-        if not overview['scope']['specs']:
-            dashboard_content += "*No specs currently in scope*\n"
-        
-        dashboard_content += "\n## 📋 Next Up (Backlog)\n"
-        
-        for spec in overview['backlog']['specs'][:5]:  # Show top 5
-            name = spec.get('name', 'Unknown')
-            description = spec.get('description', 'No description')
-            dashboard_content += f"- **{name}**: {description}\n"
-        
-        if len(overview['backlog']['specs']) > 5:
-            dashboard_content += f"- *...and {len(overview['backlog']['specs']) - 5} more*\n"
-        
-        dashboard_content += f"""
+            
+            for spec in overview['scope']['specs']:
+                completion = spec.get('completion_rate', 0)
+                name = spec.get('name', 'Unknown')
+                dashboard_content += f"- **{name}**: {completion:.0%} complete\n"
+            
+            if not overview['scope']['specs']:
+                dashboard_content += "*No specs currently in scope*\n"
+            
+            dashboard_content += "\n## 📋 Next Up (Backlog)\n"
+            
+            for spec in overview['backlog']['specs'][:5]:  # Show top 5
+                name = spec.get('name', 'Unknown')
+                description = spec.get('description', 'No description')
+                dashboard_content += f"- **{name}**: {description}\n"
+            
+            if len(overview['backlog']['specs']) > 5:
+                dashboard_content += f"- *...and {len(overview['backlog']['specs']) - 5} more*\n"
+            
+            dashboard_content += f"""
 ## 📈 Metrics
 - **Total Specs**: {sum(stage['count'] for stage in overview.values())}
 - **Active Work**: {overview['scope']['count']} specs
 - **Completion Rate**: {len([s for s in overview['scope']['specs'] if s.get('completion_rate', 0) > 0.5])} / {overview['scope']['count']} specs >50% complete
 """
-        
-        (self.meta_dir / 'status-dashboard.md').write_text(dashboard_content)
+            
+            dashboard_file = self.meta_dir / 'status-dashboard.md'
+            dashboard_file.write_text(dashboard_content, encoding='utf-8')
+            
+        except Exception as e:
+            print(f"Warning: Could not update dashboard: {e}")
+            # Don't fail the entire operation if dashboard update fails
+
+class SpecTransaction:
+    """Ensure atomic operations for spec management"""
+    
+    def __init__(self, spec_manager: SpecManager):
+        self.manager = spec_manager
+        self.rollback_actions = []
+        self.created_dirs = []
+        self.created_files = []
+        self.moved_items = []
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type:
+            # Rollback on error
+            print(f"Transaction failed: {exc_val}. Rolling back...")
+            for action in reversed(self.rollback_actions):
+                try:
+                    action()
+                except Exception as e:
+                    print(f"Warning: Rollback action failed: {e}")
+            
+            # Clean up created files and directories
+            for file_path in self.created_files:
+                try:
+                    if file_path.exists():
+                        file_path.unlink()
+                except:
+                    pass
+            
+            for dir_path in self.created_dirs:
+                try:
+                    if dir_path.exists():
+                        import shutil
+                        shutil.rmtree(dir_path)
+                except:
+                    pass
+    
+    def track_file(self, file_path: Path):
+        """Track a created file for potential rollback"""
+        self.created_files.append(file_path)
+    
+    def track_dir(self, dir_path: Path):
+        """Track a created directory for potential rollback"""
+        self.created_dirs.append(dir_path)
+    
+    def move_spec(self, from_path: Path, to_path: Path):
+        """Move spec with rollback capability"""
+        from_path.rename(to_path)
+        self.moved_items.append((from_path, to_path))
+        self.rollback_actions.append(lambda: to_path.rename(from_path))
 
 # CLI Interface
 if __name__ == "__main__":
