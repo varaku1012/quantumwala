@@ -1,4 +1,5 @@
 # EtsyPro AI - Market Research Report
+Date: Aug 5th 2025
 
 ## Executive Summary
 

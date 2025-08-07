@@ -1,0 +1,150 @@
+# Agent Hierarchy Restructure
+# Separates orchestrators (decision makers) from workers (executors)
+
+orchestrators:
+  chief-product-officer:
+    max_lines: 50
+    role: strategy-only
+    responsibilities:
+      - Product vision and strategy
+      - Prioritization decisions
+      - Resource allocation
+    delegates_to: 
+      - product-manager
+      - business-analyst
+    context_needs:
+      - product_vision
+      - market_data
+      - high_level_metrics
+    
+  product-manager:
+    max_lines: 40
+    role: coordination
+    responsibilities:
+      - Feature planning
+      - Sprint coordination
+      - Stakeholder communication
+    delegates_to:
+      - business-analyst
+      - architect
+    context_needs:
+      - feature_requirements
+      - team_capacity
+      - timeline
+
+workers:
+  developer:
+    max_lines: 40
+    role: implementation
+    receives: compressed-context
+    returns: structured-output
+    responsibilities:
+      - Code implementation
+      - Unit testing
+      - Documentation
+    context_needs:
+      - current_task
+      - design_specs
+      - code_standards
+      
+  architect:
+    max_lines: 40
+    role: design
+    receives: requirements
+    returns: technical-design
+    responsibilities:
+      - System design
+      - Technology selection
+      - Architecture decisions
+    context_needs:
+      - requirements
+      - constraints
+      - existing_architecture
+      
+  business-analyst:
+    max_lines: 40
+    role: analysis
+    receives: product-vision
+    returns: requirements
+    responsibilities:
+      - Requirements gathering
+      - User story creation
+      - Acceptance criteria
+    context_needs:
+      - user_research
+      - business_goals
+      - product_vision
+      
+  qa-engineer:
+    max_lines: 40
+    role: validation
+    receives: implementation
+    returns: test-results
+    responsibilities:
+      - Test planning
+      - Test execution
+      - Bug reporting
+    context_needs:
+      - requirements
+      - implementation
+      - test_scenarios
+      
+  security-engineer:
+    max_lines: 40
+    role: security
+    receives: design
+    returns: security-assessment
+    responsibilities:
+      - Security review
+      - Threat modeling
+      - Compliance check
+    context_needs:
+      - architecture
+      - security_policies
+      - compliance_requirements
+
+specialists:
+  devops-engineer:
+    max_lines: 40
+    role: infrastructure
+    triggered_by: deployment_needs
+    context_needs:
+      - deployment_requirements
+      - infrastructure_state
+      
+  performance-optimizer:
+    max_lines: 40
+    role: optimization
+    triggered_by: performance_issues
+    context_needs:
+      - performance_metrics
+      - bottleneck_analysis
+      
+  data-engineer:
+    max_lines: 40
+    role: data-pipeline
+    triggered_by: data_requirements
+    context_needs:
+      - data_sources
+      - processing_requirements
+
+# Agent Communication Protocol
+communication:
+  handoff_format:
+    from_agent: string
+    to_agent: string
+    task_id: string
+    context: compressed_dict
+    expected_output: string
+    
+  response_format:
+    task_id: string
+    status: success|failed|blocked
+    output: structured_data
+    next_agent: optional_string
+    
+# Context Requirements by Agent Type
+context_limits:
+  orchestrators: 6000  # More context for decision making
+  workers: 4000       # Focused context for execution
+  specialists: 3000   # Minimal context for specific tasks

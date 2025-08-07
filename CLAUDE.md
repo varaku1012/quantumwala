@@ -31,12 +31,20 @@ The system now includes persistent project context through steering documents:
    /steering-setup
    ```
 
-2. **Initialize a new project:**
+2. **Groom a new feature (NEW):**
    ```
-   /project-init "Your project description"
+   /grooming-workflow "feature-name" "Feature description"
+   ```
+   
+   Or manually:
+   ```
+   /grooming-start "feature-name"
+   /grooming-prioritize "feature-name"
+   /grooming-roadmap "feature-name"
+   /grooming-complete "feature-name"
    ```
 
-3. **Create a feature spec:**
+3. **Create a feature spec (after grooming):**
    ```
    /spec-create "feature-name" "Feature description"
    ```
@@ -98,10 +106,11 @@ The system now includes persistent project context through steering documents:
 ## Enhanced Workflow
 
 1. **Context Setup** (NEW): Steering Context Manager → Create steering docs
-2. **Planning Phase**: Product Manager → Business Analyst (context-aware)
-3. **Design Phase**: UI/UX Designer + Architect (follows standards)
-4. **Implementation Phase**: Developer (uses conventions)
-5. **Quality Phase**: QA Engineer + Code Reviewer (validates compliance)
+2. **Grooming Phase** (NEW): Chief PM + Business Analyst + Architect → Feature analysis
+3. **Planning Phase**: Product Manager → Business Analyst (context-aware)
+4. **Design Phase**: UI/UX Designer + Architect (follows standards)
+5. **Implementation Phase**: Developer (uses conventions)
+6. **Quality Phase**: QA Engineer + Code Reviewer (validates compliance)
 
 Each phase now references and aligns with steering documents automatically.
 

@@ -8,15 +8,15 @@
 
 ### Backend Services
 - **Primary Language**: Node.js 20+ with TypeScript 5+
-- **Framework**: NestJS for microservices, Express for lightweight APIs
+- **Framework**: NestJS for microservices, Express for lightweight APIs, FastAPI for Python APIs
 - **Runtime**: Node.js with PM2 process management
 - **API Protocol**: REST + GraphQL (Apollo Server)
 - **Real-time**: WebSockets (Socket.io) for live updates
 - **Storage**: Supabase Storage
-
+- **Workflow and Business Process Management**: Xstate
 
 ### Machine Learning Models
-- **Primary Language**: Typescript & Python 3.11+
+- **Primary Language**: Python 3.11+
 - **ML Framework**: TensorFlow 2.0 + PyTorch for deep learning
 - **ML Pipeline**: Prefect
 - **Model Serving**: TensorFlow Serving, TorchServe
@@ -26,9 +26,11 @@
 ### Generative AI, Ai Agents
 - **Primary Language**: Typescript & Python 3.11+
 - **AI Agent Framework**: LangGraph
-- **Workflows**: 
+- **Workflows**: LangGraph Stategraph
 - **State Management**:
 - **Vector Database**: PGVector in Supabase
+- **Others**: MCP Protocol, A2A Protocol
+- **MCP Server**: 
 
 
 ### Frontend Applications
@@ -48,11 +50,11 @@
 
 ### Data Layer
 - **Primary Database**: Supabase for transactional data
-- **Time Series DB**: 
+- **Time Series DB**: Supabase
 - **Cache Layer**: Redis 7+ for sessions and caching
 - **Search Engine**: Elasticsearch 8+ for full-text search
 - **Data Warehouse**: Supabase for analytics
-- **Message Queue**: NATS for event streaming
+- **Message Queue**: NATS for event management and streaming
 
 ### Infrastructure & DevOps
 - **Cloud Provider**: Azure (primary), with multi-cloud ready architecture

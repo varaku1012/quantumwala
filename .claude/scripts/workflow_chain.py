@@ -11,7 +11,10 @@ from datetime import datetime
 class WorkflowChain:
     def __init__(self):
         self.chains = {
-            'steering-setup': 'spec-create',
+            'grooming-start': 'grooming-workflow',
+            'grooming-workflow': 'grooming-complete',
+            'grooming-complete': 'spec-create',
+            'steering-setup': 'grooming-start',
             'spec-create': 'spec-requirements',
             'spec-requirements': 'spec-design',
             'spec-design': 'spec-tasks',
@@ -19,6 +22,9 @@ class WorkflowChain:
         }
         
         self.phase_descriptions = {
+            'grooming-start': 'Starting feature grooming',
+            'grooming-workflow': 'Running grooming analysis',
+            'grooming-complete': 'Finalizing grooming',
             'steering-setup': 'Initializing project context',
             'spec-create': 'Creating feature specification',
             'spec-requirements': 'Generating detailed requirements',
