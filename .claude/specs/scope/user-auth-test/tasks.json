@@ -1,0 +1,66 @@
+[
+  {
+    "id": "TASK-001",
+    "title": "Setup project structure",
+    "description": "Create Node.js project with Express",
+    "assignee": "developer",
+    "priority": "high",
+    "estimated_hours": 2
+  },
+  {
+    "id": "TASK-002",
+    "title": "Implement User model",
+    "description": "Create User entity and repository",
+    "assignee": "developer",
+    "priority": "high",
+    "estimated_hours": 3
+  },
+  {
+    "id": "TASK-003",
+    "title": "Implement Registration endpoint",
+    "description": "POST /auth/register with validation",
+    "assignee": "developer",
+    "priority": "high",
+    "estimated_hours": 4
+  },
+  {
+    "id": "TASK-004",
+    "title": "Implement Login endpoint",
+    "description": "POST /auth/login with JWT generation",
+    "assignee": "developer",
+    "priority": "high",
+    "estimated_hours": 4
+  },
+  {
+    "id": "TASK-005",
+    "title": "Implement JWT middleware",
+    "description": "Token validation middleware",
+    "assignee": "developer",
+    "priority": "high",
+    "estimated_hours": 3
+  },
+  {
+    "id": "TASK-006",
+    "title": "Implement MFA setup",
+    "description": "TOTP setup and QR generation",
+    "assignee": "developer",
+    "priority": "medium",
+    "estimated_hours": 5
+  },
+  {
+    "id": "TASK-007",
+    "title": "Implement Password reset",
+    "description": "Forgot password flow",
+    "assignee": "developer",
+    "priority": "medium",
+    "estimated_hours": 4
+  },
+  {
+    "id": "TASK-008",
+    "title": "Write unit tests",
+    "description": "Test coverage > 80%",
+    "assignee": "qa-engineer",
+    "priority": "high",
+    "estimated_hours": 6
+  }
+]

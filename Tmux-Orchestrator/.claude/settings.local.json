@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tmux display-message:*)",
+      "Bash(./schedule_with_note.sh:*)",
+      "Bash(ls:*)",
+      "Bash(bash:*)",
+      "Bash(dos2unix:*)",
+      "Bash(sed:*)",
+      "Bash(cat:*)"
+    ],
+    "deny": []
+  }
+}

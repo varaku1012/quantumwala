@@ -1,0 +1,60 @@
+{
+  "functional": [
+    {
+      "id": "REQ-AUTH-001",
+      "title": "User Registration",
+      "description": "Users can register with email and password",
+      "acceptance_criteria": [
+        "Email validation",
+        "Password strength requirements",
+        "Duplicate email prevention",
+        "Email verification required"
+      ]
+    },
+    {
+      "id": "REQ-AUTH-002",
+      "title": "JWT Authentication",
+      "description": "Secure login with JWT tokens",
+      "acceptance_criteria": [
+        "Token expiry 24 hours",
+        "Refresh token support",
+        "Secure token storage",
+        "Token revocation"
+      ]
+    },
+    {
+      "id": "REQ-AUTH-003",
+      "title": "Multi-Factor Authentication",
+      "description": "TOTP-based MFA support",
+      "acceptance_criteria": [
+        "QR code generation",
+        "Backup codes",
+        "Google Authenticator compatible",
+        "MFA enable/disable"
+      ]
+    },
+    {
+      "id": "REQ-AUTH-004",
+      "title": "Password Reset",
+      "description": "Secure password reset via email",
+      "acceptance_criteria": [
+        "Reset token generation",
+        "Token expiry 1 hour",
+        "Email notification",
+        "Old password invalidation"
+      ]
+    }
+  ],
+  "non_functional": [
+    {
+      "id": "REQ-PERF-001",
+      "title": "Performance",
+      "description": "Authentication response time < 200ms"
+    },
+    {
+      "id": "REQ-SEC-001",
+      "title": "Security",
+      "description": "OWASP compliant, bcrypt password hashing"
+    }
+  ]
+}

@@ -89,7 +89,7 @@ class SpecManager:
         spec_dir = self.specs_root / stage.value / name
         
         if spec_dir.exists():
-            print(f"❌ Spec '{name}' already exists in {stage.value}")
+            print(f"[ERROR] Spec '{name}' already exists in {stage.value}")
             return False
         
         try:
@@ -194,11 +194,11 @@ python .claude/scripts/spec_manager.py promote {name} --to=scope
                 print(f"Warning: Could not update dashboard: {e}")
                 # Don't fail the entire operation if dashboard update fails
             
-            print(f"✅ Created spec '{name}' in {stage.value}")
+            print(f"[SUCCESS] Created spec '{name}' in {stage.value}")
             return True
             
         except Exception as e:
-            print(f"❌ Failed to create spec '{name}': {e}")
+            print(f"[ERROR] Failed to create spec '{name}': {e}")
             # Clean up partial creation
             if spec_dir.exists():
                 import shutil

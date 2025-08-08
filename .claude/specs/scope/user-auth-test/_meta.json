@@ -1,0 +1,13 @@
+{
+  "name": "user-auth-test",
+  "description": "User authentication system with JWT, MFA, password reset, and session management",
+  "stage": "scope",
+  "created": "2025-08-07T01:57:06.554950",
+  "updated": "2025-08-07T01:57:06.554950",
+  "completion_rate": 0.0,
+  "priority": "medium",
+  "tags": [],
+  "assignee": null,
+  "version": "1.0.0",
+  "estimated_effort": "TBD"
+}

@@ -38,7 +38,7 @@ class AgentToolBridge:
     def __init__(self, project_root: Path = None):
         self.project_root = project_root or self._find_project_root()
         self.executor = RealClaudeExecutor(self.project_root)
-        self.context_engine = ContextEngine(self.project_root)
+        self.context_engine = ContextEngine()
         self.memory_manager = MemoryManager(self.project_root)
         
         # Map agent types to their execution strategies

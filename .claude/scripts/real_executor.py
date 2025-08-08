@@ -26,6 +26,26 @@ try:
 except ImportError:
     PerformanceMonitor = None
 
+# Import the critical missing components
+try:
+    from agent_tool_bridge import AgentToolBridge, TaskRequest
+except ImportError:
+    print("Warning: AgentToolBridge not found - agent delegation will not work")
+    AgentToolBridge = None
+    TaskRequest = None
+
+try:
+    from context_engine import ContextEngine
+except ImportError:
+    print("Warning: ContextEngine not found - context optimization disabled")
+    ContextEngine = None
+
+try:
+    from memory_manager import MemoryManager
+except ImportError:
+    print("Warning: MemoryManager not found - memory persistence disabled")
+    MemoryManager = None
+
 @dataclass
 class ExecutionResult:
     success: bool
@@ -43,6 +63,23 @@ class RealClaudeExecutor:
         self.claude_dir = self.project_root / '.claude'
         self.context_cache = {}
         self.performance_monitor = PerformanceMonitor() if PerformanceMonitor else None
+        
+        # Initialize the critical components
+        self.bridge = AgentToolBridge(self.project_root) if AgentToolBridge else None
+        self.context_engine = ContextEngine() if ContextEngine else None
+        self.memory_manager = MemoryManager(self.project_root) if MemoryManager else None
+        
+        # Wire dependencies if all components are available
+        if self.bridge and self.context_engine and self.memory_manager:
+            self.bridge.context_engine = self.context_engine
+            self.bridge.memory_manager = self.memory_manager
+            print("[SUCCESS] Agent Tool Bridge connected and wired to Context Engine and Memory Manager")
+        else:
+            missing = []
+            if not self.bridge: missing.append("AgentToolBridge")
+            if not self.context_engine: missing.append("ContextEngine")
+            if not self.memory_manager: missing.append("MemoryManager")
+            print(f"[WARNING] Missing components: {', '.join(missing)}")
         
         # Setup logging
         self.setup_logging()
@@ -302,11 +339,69 @@ class RealClaudeExecutor:
         except Exception as e:
             self.logger.error(f"Error terminating process: {e}")
     
+    async def handle_task_delegation(self, agent: str, description: str, context: dict = None):
+        """Handle Task tool calls from agents - THIS IS THE KEY MISSING METHOD"""
+        if not self.bridge:
+            self.logger.error("AgentToolBridge not initialized - cannot handle task delegation")
+            return ExecutionResult(
+                success=False,
+                error="Agent Tool Bridge not available",
+                command=f"Task({agent}, {description})"
+            )
+        
+        if not TaskRequest:
+            self.logger.error("TaskRequest class not available - cannot create request")
+            return ExecutionResult(
+                success=False,
+                error="TaskRequest class not available",
+                command=f"Task({agent}, {description})"
+            )
+        
+        # Create task request
+        request = TaskRequest(
+            agent=agent,
+            description=description,
+            context=context or {},
+            parent_agent='system'
+        )
+        
+        # Process through bridge
+        result = await self.bridge.process_task_delegation(request)
+        
+        # Store in memory if available
+        if self.memory_manager:
+            self.memory_manager.store_execution(
+                task_id=f"task_{agent}_{hash(description)}",
+                agent=agent,
+                result={
+                    'success': result.success,
+                    'output': result.output,
+                    'error': result.error,
+                    'duration': result.duration
+                }
+            )
+        
+        return result
+    
     def get_execution_stats(self) -> Dict:
         """Get execution statistics"""
+        stats = {}
+        
+        # Performance stats
         if self.performance_monitor:
-            return self.performance_monitor.get_performance_summary()
-        return {"message": "Performance monitoring not available"}
+            stats['performance'] = self.performance_monitor.get_performance_summary()
+        else:
+            stats['performance'] = {"message": "Performance monitoring not available"}
+        
+        # System health check
+        stats['health'] = {
+            'bridge_connected': self.bridge is not None,
+            'memory_persistent': self.memory_manager is not None and hasattr(self.memory_manager, 'long_term'),
+            'context_working': self.context_engine is not None,
+            'monitor_active': self.performance_monitor is not None
+        }
+        
+        return stats
 
 def main():
     """Test the real executor"""
