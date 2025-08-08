@@ -1,0 +1,124 @@
+# Unified Documentation Server Configuration
+# For Claude Code Multi-Agent System
+
+documentation:
+  server: unified-docs
+  
+  # Primary documentation sources
+  sources:
+    devdocs:
+      enabled: true
+      url: "https://devdocs.io/api"
+      cache_ttl: 86400  # 24 hours
+      
+    mdn:
+      enabled: true
+      url: "https://developer.mozilla.org"
+      priority: high  # For web standards
+      
+    npm:
+      enabled: true
+      registry: "https://registry.npmjs.org"
+      docs_url: "https://www.npmjs.com/package"
+      
+    python:
+      enabled: true
+      version: "3.11"
+      url: "https://docs.python.org/3"
+      
+    internal:
+      enabled: true
+      path: "../documentation/internal"
+      auto_index: true
+  
+  # Automatic source routing based on file patterns
+  auto_routing:
+    - pattern: "*.js|*.jsx|*.ts|*.tsx"
+      sources: ["mdn", "javascript", "typescript", "react", "nodejs"]
+      
+    - pattern: "*.py"
+      sources: ["python", "django", "fastapi", "sqlalchemy"]
+      
+    - pattern: "*.sql"
+      sources: ["postgresql", "mysql", "sql-standard"]
+      
+    - pattern: "*.go"
+      sources: ["golang", "go-stdlib"]
+      
+    - pattern: "Dockerfile|*.yaml|*.yml"
+      sources: ["docker", "kubernetes", "yaml"]
+      
+    - pattern: "*.rs"
+      sources: ["rust", "rust-std", "cargo"]
+      
+    - pattern: "*.java"
+      sources: ["java", "spring", "maven"]
+      
+    - pattern: "*.cs"
+      sources: ["csharp", "dotnet", "aspnet"]
+  
+  # Smart caching configuration
+  cache:
+    mode: "aggressive"
+    ttl: 86400  # 24 hours
+    size: "2GB"
+    location: "../.cache/docs"
+    preload_common: true
+    
+  # Quality gates and validation
+  validation:
+    block_deprecated: true
+    require_types: true
+    security_check: true
+    performance_hints: true
+    accessibility_check: true
+    
+  # Error prevention rules
+  error_prevention:
+    check_browser_compatibility: true
+    min_browser_versions:
+      chrome: 100
+      firefox: 100
+      safari: 15
+      edge: 100
+      
+    check_node_version: true
+    min_node_version: "18.0.0"
+    
+    check_python_version: true
+    min_python_version: "3.9"
+    
+  # Performance optimization
+  performance:
+    parallel_lookups: true
+    max_concurrent: 5
+    timeout_ms: 5000
+    retry_on_failure: true
+    max_retries: 3
+    
+  # Agent-specific configurations
+  agent_configs:
+    developer:
+      strict_mode: true
+      require_examples: true
+      validate_all_apis: true
+      
+    architect:
+      include_patterns: true
+      include_antipatterns: true
+      performance_benchmarks: true
+      
+    qa:
+      include_test_patterns: true
+      security_scanning: true
+      accessibility_rules: true
+      
+    code_reviewer:
+      style_guides: ["airbnb", "pep8", "google"]
+      lint_rules: strict
+      
+  # Offline fallback
+  offline_mode:
+    enabled: true
+    local_mirror: "../.offline-docs"
+    update_schedule: "weekly"

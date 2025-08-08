@@ -1,0 +1,11 @@
+{
+  "architecture": "microservices",
+  "patterns": [
+    "REST",
+    "Event-Driven",
+    "CQRS"
+  ],
+  "databases": [],
+  "services": [],
+  "generated_at": "2025-08-08T01:54:13.070792"
+}

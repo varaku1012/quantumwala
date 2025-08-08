@@ -1,0 +1,51 @@
+Command Cleanup Summary
+Date: 2025-08-08T15:58:57.430277
+==================================================
+
+Statistics:
+- Total commands before: 38
+- Commands archived: 26
+- Commands remaining: 12
+- Errors: 0
+
+Essential Commands Kept:
+  - project-init.md
+  - spec-create.md
+  - spec-design.md
+  - spec-list.md
+  - spec-requirements.md
+  - spec-review.md
+  - spec-status.md
+  - spec-tasks.md
+  - steering-setup.md
+  - version.md
+  - workflow-control.md
+  - workflow.md
+
+Archived Commands:
+  - analyze-codebase-execution.py: Python script for codebase analysis
+  - analyze-codebase.md: Complex analysis - rarely needed
+  - bug-analyze.md: Use spec workflow for analysis
+  - bug-create.md: Use spec-create for bug fixes
+  - bug-fix.md: Use spec workflow for implementation
+  - bug-status.md: Use spec-status instead
+  - bug-verify.md: Use spec-review for verification
+  - dashboard.md: Old dashboard system
+  - dev-mode.md: Dev mode toggle - rarely used
+  - dev-setup.md: One-time setup - rarely needed
+  - feature-complete.md: Use spec workflow completion
+  - grooming-complete.md: Part of old grooming workflow
+  - grooming-prioritize.md: Part of old grooming workflow
+  - grooming-roadmap.md: Part of old grooming workflow
+  - grooming-start.md: Part of old grooming workflow
+  - grooming-workflow.md: Complex grooming not needed - use spec workflow
+  - log-manage.md: Log management - old system
+  - parallel-analysis.md: Parallel analysis - complex and rarely used
+  - performance.md: Performance monitoring - old system
+  - planning.md: Old planning system
+  - resume-etsypro.md: Specific to EtsyPro project
+  - spec-orchestrate.md: Use workflow.md instead
+  - spec-promote.md: Automatic with workflow
+  - spec-steering-setup.md: Use steering-setup.md
+  - state-backup.md: State backup - old system
+  - strategic-analysis.md: Strategic analysis - rarely needed

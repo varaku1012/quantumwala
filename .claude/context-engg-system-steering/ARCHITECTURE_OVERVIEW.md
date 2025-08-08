@@ -24,11 +24,12 @@ The Claude Code multi-agent system follows a **Tool-Based Delegation Architectur
 ### Layer 3: Execution Scripts
 - **Location**: `.claude/scripts/`
 - **Purpose**: Actual implementation logic
-- **Examples**:
-  - `planning_executor.py` - Task planning and batching
+- **Core Scripts**:
+  - `workflow_executor.py` - Unified workflow execution
   - `context_engine.py` - Context compression
   - `memory_manager.py` - Learning system
-  - `real_executor.py` - Command execution
+  - `workflow_logger.py` - Comprehensive logging
+  - `workflow_validator.py` - Validation and health scoring
 
 ### Layer 4: User Commands
 - **Location**: `.claude/commands/`

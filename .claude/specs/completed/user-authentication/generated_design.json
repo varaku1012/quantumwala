@@ -1,0 +1,39 @@
+{
+  "architecture": "microservices",
+  "patterns": [
+    "REST",
+    "Event-Driven",
+    "CQRS"
+  ],
+  "databases": [],
+  "services": [
+    {
+      "name": "user-authentication-api",
+      "path": "services/user-authentication-api/",
+      "type": "nestjs",
+      "structure": {
+        "src": [
+          "controllers",
+          "services",
+          "entities",
+          "dto",
+          "middleware",
+          "config"
+        ],
+        "test": [
+          "unit",
+          "integration",
+          "e2e"
+        ],
+        "files": [
+          "package.json",
+          "tsconfig.json",
+          "Dockerfile",
+          "README.md",
+          ".env.example"
+        ]
+      }
+    }
+  ],
+  "generated_at": "2025-08-08T01:55:07.320240"
+}

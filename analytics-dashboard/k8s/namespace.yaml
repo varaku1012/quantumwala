@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: analytics-dashboard
+  labels:
+    name: analytics-dashboard
+    environment: production
+    app.kubernetes.io/name: analytics-dashboard
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/component: namespace

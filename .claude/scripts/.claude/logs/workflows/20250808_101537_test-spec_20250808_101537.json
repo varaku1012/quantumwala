@@ -1,0 +1,370 @@
+[
+  {
+    "timestamp": "2025-08-08T10:15:37.724231",
+    "level": "INFO",
+    "message": "Starting workflow: 20250808_101537",
+    "module": "workflow_logger",
+    "function": "__enter__",
+    "line": 359
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.724231",
+    "level": "INFO",
+    "message": "============================================================",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 115
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.724231",
+    "level": "INFO",
+    "message": "PHASE START: Initialization",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 116
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.724231",
+    "level": "INFO",
+    "message": "Description: Setting up workflow environment",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 118
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.724231",
+    "level": "INFO",
+    "message": "============================================================",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 119
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Metric: memory_usage = 1024 MB",
+    "module": "workflow_logger",
+    "function": "log_metric",
+    "line": 258
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "DEBUG",
+    "message": "Created directory: /test/dir",
+    "module": "workflow_logger",
+    "function": "log_directory_created",
+    "line": 219
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "------------------------------------------------------------",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 138
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "PHASE END: Initialization",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 139
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Status: SUCCESS",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 140
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Duration: 0.00 seconds",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 141
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "------------------------------------------------------------\n",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 144
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "============================================================",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 115
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "PHASE START: Processing",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 116
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Description: Processing spec data",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 118
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "============================================================",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 119
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Calling Agent: developer",
+    "module": "workflow_logger",
+    "function": "log_agent_call",
+    "line": 158
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "  Task: Generate code",
+    "module": "workflow_logger",
+    "function": "log_agent_call",
+    "line": 159
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "DEBUG",
+    "message": "  Context: {\n  \"spec\": \"test\"\n}",
+    "module": "workflow_logger",
+    "function": "log_agent_call",
+    "line": 161
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "DEBUG",
+    "message": "Using tool: Write",
+    "module": "workflow_logger",
+    "function": "log_tool_use",
+    "line": 190
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "DEBUG",
+    "message": "  Parameters: {\n  \"file\": \"test.py\"\n}",
+    "module": "workflow_logger",
+    "function": "log_tool_use",
+    "line": 192
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Created code file: test.py",
+    "module": "workflow_logger",
+    "function": "log_file_created",
+    "line": 207
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Agent developer completed successfully",
+    "module": "workflow_logger",
+    "function": "log_agent_response",
+    "line": 176
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "DEBUG",
+    "message": "  Response preview: Code generated",
+    "module": "workflow_logger",
+    "function": "log_agent_response",
+    "line": 178
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Progress: 5/10 (50.0%) - Processing files",
+    "module": "workflow_logger",
+    "function": "log_progress",
+    "line": 273
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "------------------------------------------------------------",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 138
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "PHASE END: Processing",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 139
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Status: SUCCESS",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 140
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Duration: 0.00 seconds",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 141
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "------------------------------------------------------------\n",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 144
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "============================================================",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 115
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "PHASE START: Validation",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 116
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "Description: Validating output",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 118
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "INFO",
+    "message": "============================================================",
+    "module": "workflow_logger",
+    "function": "start_phase",
+    "line": 119
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "ERROR",
+    "message": "Validation failed",
+    "module": "workflow_logger",
+    "function": "log_error",
+    "line": 225
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.727843",
+    "level": "ERROR",
+    "message": "Exception: Test error",
+    "module": "workflow_logger",
+    "function": "log_error",
+    "line": 227
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.731188",
+    "level": "DEBUG",
+    "message": "Traceback (most recent call last):\n  File \"C:\\Users\\varak\\repos\\quantumwala\\.claude\\scripts\\workflow_logger.py\", line 442, in <module>\n    raise ValueError(\"Test error\")\nValueError: Test error\n",
+    "module": "workflow_logger",
+    "function": "log_error",
+    "line": 228
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "------------------------------------------------------------",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 138
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "PHASE END: Validation",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 139
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "Status: FAILED",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 140
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "Duration: 0.00 seconds",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 141
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "ERROR",
+    "message": "Error: Test error",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 143
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "------------------------------------------------------------\n",
+    "module": "workflow_logger",
+    "function": "end_phase",
+    "line": 144
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "Summary saved to: .claude\\logs\\workflows\\20250808_101537_test-spec_summary.md",
+    "module": "workflow_logger",
+    "function": "generate_summary",
+    "line": 329
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "JSON log saved to: .claude\\logs\\workflows\\20250808_101537_test-spec_20250808_101537.json",
+    "module": "workflow_logger",
+    "function": "save_json_log",
+    "line": 344
+  },
+  {
+    "timestamp": "2025-08-08T10:15:37.732095",
+    "level": "INFO",
+    "message": "Workflow completed: 20250808_101537",
+    "module": "workflow_logger",
+    "function": "__exit__",
+    "line": 368
+  }
+]

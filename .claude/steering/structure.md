@@ -8,29 +8,80 @@
 
 ### Project Root Structure
 ```
-etsypro-ai/
-├── apps/                   # Application packages
-│   ├── web/               # React web application
-│   ├── mobile/            # React Native mobile app
-│   └── api/               # Backend API services
-├── packages/              # Shared packages
-│   ├── ui/                # Shared UI components
-│   ├── utils/             # Utility functions
-│   ├── types/             # TypeScript type definitions
-│   └── config/            # Shared configuration
-├── services/              # Microservices
-│   ├── auth/              # Authentication service
-│   ├── analytics/         # Analytics service
-│   ├── ml/                # Machine learning service
-│   ├── automation/        # Automation service
-│   └── notification/      # Notification service
+quantumwala/
+├── services/              # Backend microservices
+│   ├── {feature}-api/     # REST/GraphQL APIs
+│   ├── {feature}-worker/  # Background workers
+│   └── {feature}-gateway/ # API gateways
+├── frontend/              # Frontend applications
+│   ├── {app}-web/        # React web applications
+│   ├── {app}-mobile/     # React Native apps
+│   └── {app}-admin/      # Admin dashboards
+├── ml-services/           # Machine learning services
+│   ├── {model}-service/  # ML model services
+│   └── {model}-training/ # Training pipelines
+├── shared/                # Shared packages
+│   ├── ui-components/    # Shared UI components
+│   ├── utils/            # Utility functions
+│   ├── types/            # TypeScript definitions
+│   └── config/           # Shared configuration
+├── implementations/       # Feature implementations
+│   └── {feature-name}/   # Completed features
 ├── infrastructure/        # Infrastructure as code
-│   ├── terraform/         # Terraform configurations
-│   ├── kubernetes/        # K8s manifests
-│   └── docker/            # Docker configurations
-├── scripts/               # Build and deployment scripts
-├── docs/                  # Documentation
-└── .claude/               # Claude Code agent system
+│   ├── k8s/              # Kubernetes manifests
+│   │   └── {feature}/    # Per-feature configs
+│   ├── terraform/        # Terraform configurations
+│   └── docker/           # Docker configurations
+│       └── {feature}/    # Per-feature Dockerfiles
+├── scripts/              # Build and deployment scripts
+├── docs/                 # Documentation
+├── tests/                # End-to-end tests
+└── .claude/              # Claude Code agent system
+    ├── specs/            # Feature specifications
+    │   ├── backlog/      # Pending specs
+    │   ├── scope/        # In-progress specs
+    │   └── completed/    # Completed specs
+    ├── agents/           # AI agent definitions
+    ├── scripts/          # Workflow scripts
+    └── steering/         # Project steering docs
+```
+
+### Service Organization Pattern
+All services MUST follow this structure to ensure consistency:
+
+```
+services/{service-name}/
+├── src/
+│   ├── api/              # API routes/controllers
+│   ├── services/         # Business logic
+│   ├── models/           # Data models
+│   ├── repositories/     # Data access layer
+│   ├── middleware/       # Middleware
+│   ├── utils/            # Utility functions
+│   ├── config/           # Configuration
+│   └── index.ts          # Entry point
+├── tests/
+│   ├── unit/             # Unit tests
+│   ├── integration/      # Integration tests
+│   └── e2e/              # End-to-end tests
+├── package.json
+├── tsconfig.json
+├── Dockerfile
+├── .env.example
+└── README.md
+```
+
+### Implementation Folder Structure
+Completed features are organized under `implementations/`:
+
+```
+implementations/{feature-name}/
+├── README.md             # Feature overview
+├── services/             # Backend services for this feature
+├── frontend/             # Frontend apps for this feature
+├── ml-services/          # ML services for this feature
+├── infrastructure/       # Feature-specific infra
+└── docs/                 # Feature documentation
 ```
 
 ### Frontend Application Structure
@@ -295,25 +346,7 @@ Component → Hook → Service → API → Database
 ```
 
 ### Error Handling Pattern
-```typescript
-// Error handling structure
-export class AppError extends Error {
-  constructor(
-    public code: string,
-    public message: string,
-    public statusCode: number = 500
-  ) {
-    super(message);
-  }
-}
 
-// Error types
-export const ErrorCodes = {
-  ETSY_API_ERROR: 'ETSY_API_ERROR',
-  VALIDATION_ERROR: 'VALIDATION_ERROR',
-  AUTHENTICATION_ERROR: 'AUTHENTICATION_ERROR',
-} as const;
-```
 
 ## Documentation Standards
 
@@ -367,6 +400,15 @@ export const DashboardChart: React.FC<DashboardChartProps> = ({
 };
 ```
 
+
+
+### Implementation Rules
+- NEVER generate code directly in project root
+- ALWAYS use the folder structure defined above
+- Each feature gets its own folder under `implementations/`
+- Services go in `services/`, frontend in `frontend/`, ML in `ml-services/`
+- Infrastructure configs go in `infrastructure/{k8s|docker}/{feature}/`
+
 ## Performance Guidelines
 
 ### Bundle Size Limits
@@ -375,14 +417,7 @@ export const DashboardChart: React.FC<DashboardChartProps> = ({
 - **Vendor Bundle**: <300KB gzipped
 
 ### Code Splitting Strategy
-```typescript
-// Route-based splitting
-const AnalyticsDashboard = lazy(() => import('./pages/AnalyticsDashboard'));
-const AutomationCenter = lazy(() => import('./pages/AutomationCenter'));
 
-// Component-based splitting for heavy components
-const AdvancedChart = lazy(() => import('./components/AdvancedChart'));
-```
 
 ### Image Optimization
 - Use WebP format with fallbacks
@@ -390,6 +425,3 @@ const AdvancedChart = lazy(() => import('./components/AdvancedChart'));
 - Provide multiple sizes for responsive images
 - Compress images to <100KB where possible
 
----
-*Last Updated: 2025-08-04*
-*Lead Developer: EtsyPro AI Team*

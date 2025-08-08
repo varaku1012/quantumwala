@@ -16,9 +16,9 @@ The `AgentToolBridge` class is defined but **NEVER integrated** with the actual 
 
 ```python
 # agent_tool_bridge.py exists but is NOT called by:
-- real_executor.py (doesn't import it)
-- unified_workflow.py (doesn't use it)
+- workflow_executor.py (doesn't import it yet)
 - Any agent definitions (they can't call Python directly)
+# This needs to be integrated into the unified workflow
 ```
 
 **Impact**: The entire Task tool delegation system is broken. Agents using Task tool won't actually trigger the bridge.
@@ -111,14 +111,13 @@ The Task tool in Claude Code expects specific format, not markdown pseudo-code.
 
 ## 4. SCRIPT IMPLEMENTATION ISSUES
 
-### Issue: Async Functions Not Awaited
-**Location**: `unified_workflow.py`
-**Severity**: HIGH
+### Issue: Async Functions Need Proper Handling
+**Location**: `workflow_executor.py`
+**Severity**: MEDIUM
 
 ```python
-def continue_workflow(self):
-    # Calls async function without await!
-    result = workflow._execute_phase(...)  # This returns a coroutine!
+# Workflow executor properly uses async/await
+# But agent integration will need careful async handling
 ```
 
 ### Issue: Resource Manager Does Nothing
@@ -132,14 +131,14 @@ class ResourceManager:
         # No actual resource checking
 ```
 
-### Issue: Parallel Execution Not Thread-Safe
-**Location**: `parallel_workflow_orchestrator.py`
-**Severity**: HIGH
+### Issue: Thread Safety in Workflow Execution
+**Location**: `workflow_executor.py`
+**Severity**: MEDIUM
 
 ```python
-# Modifies shared state without locks
-self.phase_contexts[phase_name] = result
-# Multiple async tasks can corrupt this
+# Current workflow is sequential
+# Future parallel execution needs thread safety
+self.results[phase_name] = result  # Needs protection
 ```
 
 ## 5. COMMAND SYSTEM PROBLEMS

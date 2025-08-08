@@ -1,0 +1,20 @@
+{
+  "name": "test-fix-validation",
+  "description": "Testing the fixed create command",
+  "stage": "backlog",
+  "created": "2025-08-04T19:28:47.982724",
+  "updated": "2025-08-04T19:28:47.982724",
+  "completion_rate": 0.0,
+  "priority": "medium",
+  "tags": [],
+  "assignee": null,
+  "version": "1.0.0",
+  "estimated_effort": "TBD",
+  "status": "COMPLETED",
+  "scope_date": "2025-08-08T13:28:14.447020",
+  "workflow_id": "test-fix-validation_20250808_132814",
+  "completion_date": "2025-08-08T13:28:14.482334",
+  "implementation_location": "implementations/test-fix-validation",
+  "log_file": "C:\\Users\\varak\\repos\\quantumwala\\.claude\\logs\\workflows\\20250808_132814_test-fix-validation_test-fix-validation_20250808_132814.log",
+  "summary_file": "C:\\Users\\varak\\repos\\quantumwala\\.claude\\logs\\workflows\\20250808_132814_test-fix-validation_summary.md"
+}

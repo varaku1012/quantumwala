@@ -51,7 +51,7 @@ Etsy sellers face increasing competition with 8.13 million active sellers on the
 4. **Global Reach**: Support international sellers in 25+ languages
 
 ### Success Criteria
-- Achieve 50,000 active users within 12 months
+- Achieve 100,000 active users within 12 months
 - Generate $2M ARR by end of Year 1
 - Maintain 70+ NPS score
 - Enable $100M+ in additional seller revenue
@@ -173,7 +173,9 @@ Etsy sellers face increasing competition with 8.13 million active sellers on the
 ## Resource Requirements
 
 ### Core Team (Phase 1-2)
-- 1 Product Manager
+- 1 Chief Product Manager
+- 3 Product Manager
+- 3 Architect
 - 1 Technical Lead
 - 2 Backend Engineers
 - 1 Frontend Engineer
@@ -184,10 +186,11 @@ Etsy sellers face increasing competition with 8.13 million active sellers on the
 ### Expanded Team (Phase 3-4)
 - +2 Backend Engineers
 - +1 ML Engineer
+- +1 Genai Engineer
 - +1 DevOps Engineer
-- +2 Customer Success
+- +2 Customer Success SME
 - +1 Marketing Manager
-- +1 Sales (Enterprise)
+- +1 Sales Manager (Enterprise)
 
 ### Technology Resources
 - Cloud Infrastructure (AWS/GCP)
@@ -199,20 +202,23 @@ Etsy sellers face increasing competition with 8.13 million active sellers on the
 ## Project Governance
 
 ### Steering Committee
-- Meets bi-weekly
+- meet daily
 - Reviews progress and blockers
 - Approves major decisions
-- Members: CPO, CTO, CFO, Head of Product
+- Members: All Agents
 
 ### Operating Rhythm
+- Meets daily two times for standup calls
+- Beginiing the of the week grooming of the backlog cermony
+- Beginiing the of the week Demo cermony
 - Daily standups (development team)
 - Weekly product reviews
-- Bi-weekly steering committee
-- Monthly board updates
-- Quarterly business reviews
+- Daily steering committee
+- Daily board updates
+- Daily business reviews
 
 ### Decision Rights
-- **Feature Changes**: Product Manager (< 1 week impact)
+- **Feature Changes**: Chief Product Manager (< 1 week impact)
 - **Technical Architecture**: Technical Lead + CTO
 - **Budget Changes**: CFO (> $50K)
 - **Strategic Pivots**: Steering Committee

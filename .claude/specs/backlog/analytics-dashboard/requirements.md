@@ -4,6 +4,7 @@
 **Created By:** Business Analyst Agent  
 **Date:** 2025-08-04  
 **Feature:** analytics-dashboard  
+**Status:** IN_SCOPE  
 
 ## Executive Summary
 

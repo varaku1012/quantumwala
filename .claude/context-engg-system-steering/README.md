@@ -1,10 +1,29 @@
 # Context Engineering System - Steering Documents
 
+## 📊 Current Status (January 2025)
+- **System Functionality**: ~55% (improved from 35%)
+- **Scripts**: Consolidated 64+ scripts → 9 essential scripts (86% reduction)
+- **Commands**: Reduced 38 commands → 12 essential (68% reduction)
+- **Main Executor**: `workflow_executor.py` (unified, clean implementation)
+- **Status Document**: See [CURRENT_STATE_2025.md](./CURRENT_STATE_2025.md) for details
+
 ## Overview
 
 This directory contains the core steering documents for the Context Engineering System implementation in Claude Code. These documents capture the architectural decisions, design principles, and implementation strategies for building an efficient multi-agent system.
 
 ## Document Structure
+
+### Key Documents
+
+#### [CURRENT_STATE_2025.md](./CURRENT_STATE_2025.md) 
+- Latest system status and progress
+- Consolidation results
+- Remaining gaps and priorities
+
+#### [COMMAND_CONSOLIDATION_COMPLETE.md](./COMMAND_CONSOLIDATION_COMPLETE.md)
+- Command reduction from 38 to 12
+- Migration guide for old commands
+- Simplified command interface
 
 ### 1. [ARCHITECTURE_OVERVIEW.md](./ARCHITECTURE_OVERVIEW.md)
 - System architecture and layers
@@ -84,17 +103,17 @@ The system follows a **Tool-Based Delegation Architecture** where:
 ## Implementation Status
 
 ### ✅ Completed
-- Agent architecture design
-- Context engineering strategies
-- Memory system design
-- Planning executor
-- Tool bridge concept
+- Workflow consolidation (single executor)
+- Proper folder structure (implementations/{feature}/)
+- Comprehensive logging system
+- Validation and health scoring
+- Script cleanup (86% reduction)
 
 ### 🚧 In Progress
-- Grooming workflow real execution
+- Agent integration with workflow
 - Context pipeline between phases
-- Resource management enforcement
-- Performance tracking
+- Memory persistence implementation
+- Token optimization with tiktoken
 
 ### 📋 Planned
 - Real-time dashboard
@@ -112,9 +131,10 @@ The system follows a **Tool-Based Delegation Architecture** where:
    - Study [CONTEXT_ENGINEERING_STRATEGIES.md](./CONTEXT_ENGINEERING_STRATEGIES.md)
 
 2. **Implementation**
-   - Check [IMPLEMENTATION_GAPS.md](./IMPLEMENTATION_GAPS.md) for current status
+   - Check [CURRENT_STATE_2025.md](./CURRENT_STATE_2025.md) for latest status
+   - Review [IMPLEMENTATION_GAPS.md](./IMPLEMENTATION_GAPS.md) for remaining work
    - Follow patterns in [CLAUDE_CODE_INTEGRATION.md](./CLAUDE_CODE_INTEGRATION.md)
-   - Use agent_tool_bridge.py for delegation handling
+   - Use workflow_executor.py as the main entry point
 
 3. **Creating New Agents**
    ```markdown
@@ -131,7 +151,7 @@ The system follows a **Tool-Based Delegation Architecture** where:
 
 1. **Quick Start**
    ```bash
-   /dev-workflow "feature description"
+   python .claude/scripts/start_workflow.py [spec-name]
    ```
 
 2. **Using Specific Agents**

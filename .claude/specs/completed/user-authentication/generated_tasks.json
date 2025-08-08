@@ -1,0 +1,9 @@
+[
+  {
+    "id": "TASK-001",
+    "title": "Implement user-authentication-api",
+    "service": "user-authentication-api",
+    "path": "services/user-authentication-api/",
+    "priority": "high"
+  }
+]

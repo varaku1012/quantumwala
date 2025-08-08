@@ -1,9 +1,17 @@
 # Command Deletion Summary
 
-## Date: 2024-01-06
-## Action: Consolidated redundant commands
+## Latest Update: 2025-01-08
+## Action: Second major consolidation - archived 26 more commands
 
-## Commands Deleted (14 total)
+## Phase 2: January 2025 Cleanup (26 deleted)
+- Grooming workflow commands (5)
+- Bug management commands (5) 
+- Analysis commands (4)
+- Dev setup commands (2)
+- Spec extras (3)
+- Old system commands (7)
+
+## Phase 1: January 2024 (14 deleted)
 
 ### Workflow Orchestration Commands (11 deleted)
 These were all replaced by `/workflow` with different options:
@@ -27,63 +35,36 @@ These were duplicates or overlapping:
 13. **spec-implement.md** → replaced by `/spec-orchestrate`
 14. **spec-execute.md** → replaced by `/spec-orchestrate`
 
-## Commands Remaining (37 total)
+## Commands Remaining (12 total - after Phase 2)
 
 ### Core Workflows (2)
 - `/workflow` - Unified workflow execution
 - `/workflow-control` - Manual workflow control
 
-### Specification Management (9)
+### Specification Management (7)
 - `/spec-create` - Create specification
 - `/spec-requirements` - Generate requirements
 - `/spec-design` - Create design
 - `/spec-tasks` - Generate tasks
-- `/spec-orchestrate` - Execute tasks
 - `/spec-review` - Review implementation
 - `/spec-status` - Check status
 - `/spec-list` - List all specs
-- `/spec-promote` - Promote specs between stages
-- `/spec-steering-setup` - Setup steering for specs
 
-### Feature Grooming (5)
-- `/grooming-workflow` - Full grooming workflow
-- `/grooming-start` - Start grooming
-- `/grooming-prioritize` - Set priorities
-- `/grooming-roadmap` - Create roadmap
-- `/grooming-complete` - Finalize grooming
 
-### Bug Management (5)
-- `/bug-create` - Report bug
-- `/bug-analyze` - Analyze cause
-- `/bug-fix` - Implement fix
-- `/bug-verify` - Verify fix
-- `/bug-status` - Check status
-
-### System Management (7)
+### Project Setup (2)
 - `/project-init` - Initialize project
 - `/steering-setup` - Setup steering context
-- `/dev-setup` - Setup development environment
-- `/dev-mode` - Toggle development mode
-- `/dashboard` - Monitoring dashboard
-- `/log-manage` - Log management
-- `/state-backup` - State backup/restore
+
+### System (1)
 - `/version` - Version information
 
-### Analysis Tools (4)
-- `/analyze-codebase` - Analyze codebase
-- `/strategic-analysis` - Strategic feature analysis
-- `/parallel-analysis` - Parallel analysis execution
-- `/planning` - Planning and dependencies
-- `/performance` - Performance metrics
-
-### Utilities (2)
-- `/feature-complete` - Mark feature complete
-- `/resume-etsypro` - Resume specific workflow
 
 ## Benefits Achieved
 
 ### Quantitative
-- **Reduced from 51 to 37 commands** (27% reduction)
+- **Phase 1**: Reduced from 51 to 37 commands (27% reduction)
+- **Phase 2**: Reduced from 38 to 12 commands (68% reduction)
+- **Total**: Reduced from 51 to 12 commands (76% reduction)
 - **Eliminated 11 redundant workflow commands** → 1 unified command
 - **Removed 3 duplicate spec commands**
 

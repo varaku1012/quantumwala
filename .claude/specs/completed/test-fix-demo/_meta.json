@@ -1,0 +1,17 @@
+{
+  "name": "test-fix-demo",
+  "description": "Testing the fixed create command",
+  "stage": "backlog",
+  "created": "2025-08-04T19:31:15.843919",
+  "updated": "2025-08-04T19:31:15.843919",
+  "completion_rate": 0.0,
+  "priority": "medium",
+  "tags": [],
+  "assignee": null,
+  "version": "1.0.0",
+  "estimated_effort": "TBD",
+  "status": "COMPLETED",
+  "scope_date": "2025-08-08T13:07:45.716964",
+  "completion_date": "2025-08-08T13:07:45.743073",
+  "implementation_location": "implementations/test-fix-demo"
+}

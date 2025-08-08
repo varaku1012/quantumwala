@@ -1,0 +1,31 @@
+{
+  "project_state": "initialized",
+  "version": "1.0.0",
+  "created_at": "2025-01-30T00:00:00Z",
+  "documentation_server": {
+    "enabled": true,
+    "sources": ["devdocs", "mdn", "npm", "python", "internal"],
+    "cache_enabled": true
+  },
+  "agents": {
+    "available": [
+      "product_manager",
+      "business_analyst",
+      "uiux_designer",
+      "architect",
+      "developer",
+      "qa_engineer",
+      "code_reviewer",
+      "devops_engineer"
+    ],
+    "metrics": {}
+  },
+  "features": {},
+  "tasks": {},
+  "configuration": {
+    "enable_documentation": true,
+    "validation_threshold": 70,
+    "parallel_execution": true,
+    "max_concurrent_agents": 5
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "test-spec",
+  "description": "Testing the create functionality",
+  "stage": "backlog",
+  "created": "2025-08-04T17:51:23.311440",
+  "updated": "2025-08-04T17:51:23.311440",
+  "completion_rate": 0.0,
+  "priority": "medium",
+  "tags": [],
+  "assignee": null,
+  "status": "IN_SCOPE",
+  "scope_date": "2025-08-08T01:54:13.062489"
+}

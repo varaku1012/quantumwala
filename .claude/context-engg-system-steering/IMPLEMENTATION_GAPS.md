@@ -2,26 +2,25 @@
 
 ## Critical Gaps Identified
 
-### 1. ❌ Grooming Workflow Creates Fake Outputs
-**Location**: `.claude/scripts/grooming_workflow.py` (lines 86-93)
-**Issue**: Creates placeholder text instead of executing agents
-**Impact**: No real analysis performed
+### 1. ❌ Workflow Executor Agent Integration Missing
+**Location**: `.claude/scripts/workflow_executor.py`
+**Issue**: Currently uses templates instead of real agent calls
+**Impact**: No AI-generated content
 
 **Solution**:
 ```python
-async def phase1_research_discovery(self):
-    """Execute real agent analysis"""
-    executor = RealClaudeExecutor(self.project_root)
+async def generate_requirements(self):
+    """Execute real agent for requirements"""
+    from agent_tool_bridge import AgentToolBridge
     
-    # Real parallel execution
-    tasks = [
-        executor.execute_agent_task('business-analyst', f'analyze {self.feature_name}'),
-        executor.execute_agent_task('architect', f'assess feasibility for {self.feature_name}'),
-        executor.execute_agent_task('chief-product-manager', f'market research for {self.feature_name}')
-    ]
+    bridge = AgentToolBridge()
+    result = await bridge.process_task_delegation({
+        'agent': 'business-analyst',
+        'description': f'Generate requirements for {self.spec_name}',
+        'context': self.get_spec_context()
+    })
     
-    results = await asyncio.gather(*tasks)
-    self._write_real_outputs(results)
+    return result.output
 ```
 
 ### 2. ❌ Planning Commands Not Connected
@@ -44,7 +43,7 @@ Run: python .claude/scripts/planning_executor.py implementation {spec_name}
 ```
 
 ### 3. ❌ Context Pipeline Missing Between Phases
-**Location**: `parallel_workflow_orchestrator.py`
+**Location**: `workflow_executor.py`
 **Issue**: Each phase starts with fresh context
 **Impact**: Lost information between phases
 
@@ -93,7 +92,7 @@ async def execute_workflow(self, description: str, mode: str = 'quick'):
 ```
 
 ### 5. ❌ Memory System Not Connected to Execution
-**Location**: `real_executor.py`
+**Location**: `workflow_executor.py`
 **Issue**: Doesn't retrieve or store memories
 **Impact**: No learning from past executions
 

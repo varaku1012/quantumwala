@@ -24,7 +24,7 @@ First, analyze the request to understand:
 - Required expertise
 - Potential risks
 
-### 2. Create Project Structure
+### 2. Specifications Context - Current development workflow Scope related Specs, Design & Tasks and other context 
 ```
 .claude/specs/{feature-name}/
 ├── overview.md       # Product vision

@@ -1,0 +1,75 @@
+Script Cleanup Summary
+Date: 2025-08-08T15:20:26.923850
+==================================================
+
+Statistics:
+- Total scripts before: 61
+- Scripts archived: 56
+- Scripts remaining: 5
+- Errors: 0
+
+Essential Scripts Kept:
+  - cleanup_scripts.py
+  - context_engine.py
+  - memory_manager.py
+  - spec_cleanup.py
+  - start_workflow.py
+  - steering_loader.py
+  - workflow_executor.py
+  - workflow_logger.py
+  - workflow_validator.py
+
+Archived Scripts:
+  - agent_tool_bridge.py: Old bridge system
+  - archive_old_executors.py: Already used, can archive
+  - check_agents.py: Agent checker - rarely used
+  - codebase_analyzer.py: Code analyzer - rarely used
+  - context_aware_loader.py: Replaced by context_engine.py
+  - create_database.py: DB creation - one-time
+  - dashboard.py: Old dashboard
+  - deprecated_commands.py: Explicitly deprecated
+  - dev_environment_validator.py: Old validator
+  - dev_mode_manager.py: Old dev mode
+  - developer_errors.py: Old error tracking
+  - developer_status.py: Old status tracking
+  - enhanced_dashboard.py: Old dashboard
+  - execute_real_workflow.py: Replaced by workflow_executor.py
+  - generate-task-commands.sh: Old shell script
+  - get_content.py: Content getter - rarely used
+  - get_tasks.py: Task getter - rarely used
+  - grooming_workflow.py: Old grooming workflow
+  - integrated_system.py: Old integration system
+  - log_manager.py: Old log manager
+  - master_orchestrator_fix.py: Old orchestrator fix
+  - orchestrate-auth-test.py: Specific test orchestrator
+  - orchestrate-test-context-integration.py: Specific test orchestrator
+  - orchestrate-test-demo.py: Specific test orchestrator
+  - parallel_workflow_orchestrator.py: Replaced by workflow_executor.py
+  - parallel_workflow_test.py: Test for obsolete orchestrator
+  - performance_monitor.py: Old performance monitor
+  - planning_executor.py: Replaced by workflow_executor.py
+  - real_executor.py: Replaced by workflow_executor.py
+  - real_workflow_executor.py: Replaced by workflow_executor.py
+  - resource_manager.py: Old resource manager
+  - simple_dashboard.py: Old dashboard
+  - simple_workflow_monitor.py: Old monitor
+  - spec_manager.py: Old spec manager
+  - spec_migrator.py: One-time migration script
+  - suggestion_consumer.py: Old suggestion system
+  - system_health_check.py: Old health check
+  - task-generator.py: Old task generator
+  - task_orchestrator.py: Old task orchestrator
+  - test_complete_workflow.py: Old workflow test
+  - test_dashboard.py: Dashboard test
+  - test_real_execution.py: Old execution test
+  - test_workflow.py: Old workflow test
+  - unified_dev_workflow.py: Replaced by workflow_executor.py
+  - unified_state.py: Old state management
+  - unified_workflow.py: Replaced by workflow_executor.py
+  - version_manager.py: Version management - rarely used
+  - workflow_automation.py: Replaced by workflow_executor.py
+  - workflow_chain.py: Replaced by workflow_executor.py
+  - workflow_control.py: Old workflow control
+  - workflow_monitor.py: Old monitor
+  - workflow_recovery.py: Old recovery system
+  - workflow_state.py: Old workflow state

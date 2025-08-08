@@ -1,0 +1,9 @@
+{
+  "stage": "scope",
+  "updated": "2025-08-04T17:29:33.776283",
+  "promotion_reason": "Ready for development",
+  "status": "COMPLETED",
+  "scope_date": "2025-08-08T01:55:07.317226",
+  "completion_date": "2025-08-08T01:55:07.406324",
+  "implementation_location": "implementations/user-authentication"
+}

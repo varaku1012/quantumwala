@@ -18,29 +18,28 @@ The bridge exists but isn't connected to anything.
 
 ### Solution
 ```python
-# Fix 1: Update real_executor.py
+# Fix 1: Update workflow_executor.py
 from agent_tool_bridge import AgentToolBridge, TaskRequest
 
-class RealClaudeExecutor:
-    def __init__(self, project_root=None):
-        self.project_root = project_root
-        self.bridge = AgentToolBridge(project_root)  # ADD THIS
+class WorkflowExecutor:
+    def __init__(self, spec_name, spec_folder="backlog"):
+        self.spec_name = spec_name
+        self.bridge = AgentToolBridge()  # ADD THIS for agent integration
     
-    async def handle_task_delegation(self, agent, description, context):
-        """New method to handle Task tool calls"""
+    async def delegate_to_agent(self, agent, description, context):
+        """New method to handle agent delegations"""
         request = TaskRequest(
             agent=agent,
             description=description,
-            context=context,
-            parent_agent='system'
+            context=context
         )
         return await self.bridge.process_task_delegation(request)
 ```
 
 ### Files to Update
-- [ ] `real_executor.py` - Add bridge integration
-- [ ] `unified_workflow.py` - Use bridge for delegations
-- [ ] `parallel_workflow_orchestrator.py` - Route through bridge
+- [ ] `workflow_executor.py` - Add bridge integration for agent calls
+- [ ] `context_engine.py` - Connect to workflow for context optimization
+- [ ] `memory_manager.py` - Integrate with workflow for persistence
 
 ## 1.2 Fix Memory Persistence
 

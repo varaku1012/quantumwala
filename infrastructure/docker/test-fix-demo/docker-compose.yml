@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  # Add service definitions here
+  
+networks:
+  test-fix-demo:
+    driver: bridge
